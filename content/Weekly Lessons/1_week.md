@@ -1,8 +1,8 @@
 Title: Week 1 Excercises
 Date: 2020-05-09 11:15
-Tags: week_1, excercises, leetcode
+Tags: Week 1, Excercises, LeetCode
 
-## Goals
+### Goals
 
 This week we will be covering the fundamentals of *linked lists* and common ways they appear in interviews.
 
@@ -14,7 +14,7 @@ This week we will be covering the fundamentals of *linked lists* and common ways
 - Comfort with pointer bookkeeping
 - Framework for approaching Linked List problems
 
-## Monday
+### Monday
 
 1. Read the [Linked List Codepath Wiki Article](https://github.com/codepath/compsci_guides/wiki/Linked-Lists)
 2. Read about the [Dummy Head](https://github.com/codepath/compsci_guides/wiki/Dummy-Head), [Multiple Pass](https://github.com/codepath/compsci_guides/wiki/Multiple-Pass), and [Two-Pointer](https://github.com/codepath/compsci_guides/wiki/Linked-List-Two-Pointer) linked list design patterns.
@@ -25,9 +25,9 @@ This week we will be covering the fundamentals of *linked lists* and common ways
     * [Add Two Numbers - LeetCode](https://leetcode.com/problems/add-two-numbers/)
     * [Odd Even Linked List - LeetCode](https://leetcode.com/problems/odd-even-linked-list/)
 
-## Wednesday
+### Wednesday
 
-Read the UMPIRE method post [here]({filename}/umpire.md) and follow the steps (Understand, Match, Prototype, Implement, Review, and Evaluate) as you solve the problems. Take special care to match based on the linked list designed patterns learned on Monday, and to sketch visualizations / write pseudo code on a notepad near your computer. Pointer Bookeeping (demonstrated in [this lecture](https://www.youtube.com/watch?list=PLrT2tZ9JRrf65ueO-CGGT_Y8pfZfHv0vR&v=RH9-7SPVZw4)) can be a helpful tool for linked list diagramming.
+Read the UMPIRE method post [here]({filename}/pages/umpire.md) and follow the steps (Understand, Match, Prototype, Implement, Review, and Evaluate) as you solve the problems. Take special care to match based on the linked list designed patterns learned on Monday, and to sketch visualizations / write pseudo code on a notepad near your computer. Pointer Bookeeping (demonstrated in [this lecture](https://www.youtube.com/watch?list=PLrT2tZ9JRrf65ueO-CGGT_Y8pfZfHv0vR&v=RH9-7SPVZw4)) can be a helpful tool for linked list diagramming.
 
 * [Swap Nodes in Pairs - LeetCode](https://leetcode.com/problems/swap-nodes-in-pairs/)
 * [Rotate List - LeetCode](https://leetcode.com/problems/rotate-list/description/)
@@ -35,7 +35,7 @@ Read the UMPIRE method post [here]({filename}/umpire.md) and follow the steps (U
 * [Add Two Numbers II - LeetCode](https://leetcode.com/problems/add-two-numbers-ii/)
 
 
-## Saturday
+### Saturday
 
 * [Merge Two Sorted Lists - LeetCode](https://leetcode.com/problems/merge-two-sorted-lists/)
 * [Intersection of Two Linked Lists - LeetCode](https://leetcode.com/problems/intersection-of-two-linked-lists/)

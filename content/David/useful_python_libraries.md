@@ -1,7 +1,7 @@
 Title: Stacks, Queues, Heaps, and Hash Tables in Python
 Date: 2020-05-10 13:09
 Authors: David Hadaller
-Tags, Python, Data Structures
+Tags: Python, Data Structures
 
 
 Many interview problems that rely on stacks, queues, and hash tables, could be made easier by importing some python libraries that I rarely use. Most of these are in sections [8.3: collections](https://docs.python.org/3.8/library/collections.html), and [8.4 : heapq](https://docs.python.org/3.8/library/heapq.html?highlight=heapq#module-heapq),  in the Python documentation. 

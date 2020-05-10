@@ -6,8 +6,8 @@ import datetime
 ## THINGS TO CONFIGURE
 ## ---------------------------------------------------------------------
 
-AUTHOR = u'A blog-o-matic user'
-SITENAME = u'My personal blog with blog-o-matic'
+AUTHOR = u'David Hadaller'
+SITENAME = u'CCNY_Prep'
 SITESUBTITLE = u'This is where I do test things'
 SITEURL = u'/'
 DEFAULT_LANG = u'en'
@@ -30,19 +30,19 @@ LANDING_PAGE_ABOUT = {'title': 'My blog',
 #              'description': 'A Telegram bot with support for Karma, RSS Feeds, Quotes, etc'}]
 
 
-LINKS = (('Redken on telegram', 'https://t.me/redken_bot'),
-         ('RHJobs channel on TG', "https://t.me/rhjobs"),)
+# LINKS = (('Redken on telegram', 'https://t.me/redken_bot'),
+#          ('RHJobs channel on TG', "https://t.me/rhjobs"),)
 
 # Keep 'name' like 'twitter' with what 'FontAwesome has for putting the right icon'
 
-SOCIAL = (('Twitter', 'http://twitter.com/iranzop'),
-          ('github', 'http://github.com/iranzo'),
-          ('linkedin', 'https://www.linkedin.com/in/iranzo/'),)
+# SOCIAL = (('Twitter', 'http://twitter.com/iranzop'),
+#           ('github', 'http://github.com/iranzo'),
+#           ('linkedin', 'https://www.linkedin.com/in/iranzo/'),)
 
 
 # TWITTER_USERNAME = "fillit"
 # Update if you use amazon links
-AMAZON_ONELINK = "23824450-ef77-4537-9259-8590465886f1"
+# AMAZON_ONELINK = "23824450-ef77-4537-9259-8590465886f1"
 
 # GOOGLE_ANALYTICS tracking ID
 # GOOGLE_ANALYTICS = "UA-81705-12"
@@ -81,7 +81,7 @@ PHOTO_EXIF_COPYRIGHT = 'COPYRIGHT'
 
 PATH = 'content'
 
-TIMEZONE = 'Europe/Madrid'
+TIMEZONE = 'US/Eastern'
 
 # Put as draft content in the future
 WITH_FUTURE_DATES = True
@@ -151,7 +151,7 @@ SHARE_POST_INTRO = 'Like this post? Share on:'
 COMMENTS_INTRO = u''
 
 FILENAME_METADATA = '(?P<date>\d{4}-\d{2}-\d{2})-(?P<slug>.*)'
-USE_FOLDER_AS_CATEGORY = False
+USE_FOLDER_AS_CATEGORY = True
 
 SEARCH_BOX = False
 

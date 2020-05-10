@@ -1,12 +1,5 @@
-Title: My First Review
-Date: 2010-12-03 10:20
-Category: Review
+Title: Welcome to CCNY_Prep
+Date: 2020-05-09 10:53
+Category: Welcome
 
-Following is a review of my favorite mechanical keyboard.
-
-dlkajnsldknfaskljnfkld
-asdkljfnaslkdjnfkaljsd
-asdljfnalskjdnflkans
-askdljnfalksdjnflkajsdlnkf
-asldkjfalksdjfklajnsdkfl
-asldkjfnalksdjkfljadsn
+Welcome to the CCNY technical interview prep course for Software Engineering roles. 

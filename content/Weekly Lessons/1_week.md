@@ -1,6 +1,6 @@
-Title: Breaking Down Interview Questions With UMPIRE
+Title: Week 1 Excercises
 Date: 2020-05-09 11:15
-Tags: week_1
+Tags: week_1, excercises, leetcode
 
 ## Goals
 

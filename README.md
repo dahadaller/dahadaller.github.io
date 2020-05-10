@@ -62,8 +62,8 @@ Generally, blog posts can be about any topic you think would be helpful to the g
 ```markdown
 Title: David's Week 1 Excercises
 Date: 2020-05-09 11:15
-Tags: week_1   
-
+Authors: David Hadaller
+Tags: week_1
 
 ## Subtitle 
 

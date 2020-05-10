@@ -4,7 +4,9 @@ Category: Reference
 Tags: UMPIRE
 
 
-For **EVERY** problem whether in real interviews or studying always create a plan of attack. One great plan is called the UMPIRE method which is:
+For any problem -- whether in interviews, or studying -- one must always create a plan of attack. The UMPIRE method is one way to create such a plan, and find your solution. It's especially helpful when you're completely lost as to how to solve a given problem. 
+
+The UMPIRE Method:
 
 1. **Understand**what the interviewer is asking for by using test cases and questions about the problem.
 2. **Match**what this problem looks like to known categories of problems, e.g. Linked List or Dynamic Programming and strategies or patterns in those categories.
@@ -13,17 +15,15 @@ For **EVERY** problem whether in real interviews or studying always create a pla
 5. **Review**the code by running specific example(s) and recording values (watchlist) of your code's variables along the way.
 6. **Evaluate**the performance of your algorithm and state any strong/weak or future potential work.
 
-The point of any plan is to organize your thoughts, so you never need remember. Use your brain as a CPU not a hard drive. Your brain can only handle so many things at once so use its power to process rather then remember. Not only does planning help organize your thoughts, it will help you get to the answer faster and show the interviewer that you don’t dive in right away without thought. For example, if you go straight to code with **one idea**there is a 99% possibility of:
+UMPIRE helps you organize your thoughts to avoid getting stuck in an interview. Also, even though it might seem like a drawn out process, it will help solve problems *faster* than jumping in without a plan. Also, when you dive in to coding the answer to the problem right away, the consequences are as follows: 
 
-1)   The interviewer will think you isolate yourself which means they think you wont be able to work in a team 
-
-2)   The interviewer cannot help you if they don’t know your thought process **ABS (ALWAYS BE SPEAKING!!!)**
-
-3)   You will get to a dead end with 10 minutes left and then will need to re organize yourself. I call this the suicide route. If you tell the interviewer your plan beforehand, they can guide you in the right direction, so you don’t end up with the wrong code
+* The interviewer will think you isolate yourself when you solve problems. Translation: you won't be able to work on a team effectively. 
+* You will miss out on valuable hints. Part of UMPIRE is opening dialogue with the interviewer. The interviewer cannot help you if they don’t know your thought process **ABS (ALWAYS BE SPEAKING)**
+* You may find yourself at a dead end with 10 minutes remaining, and you will then scremble to reorganize your approach. If you tell the interviewer your plan beforehand, as is done in UMPIRE, the interviewer can guide you in the right direction, and prevent you from going down that path.
 
 ## UNDERSTAND:
 
-One of the best ways to understand a problem is to come up with test cases. Coming up with good test cases can be an art, but I typically like to cover one happy path or an average case. And any interesting edge cases. This can be tricky as it depends on the problem. Remember that the interview is a dialog, so understanding the problem is best done as a dialog as well. Asking questions, like Should this be done in place?... Does the ordering beyond the left/right of the partition matter? Create simple test cases and try to talk with your interviewer to see if they believe you get the idea. NEVER leave any stones unturned, keep asking until you perfectly understand the questions!!!
+One of the best ways to understand a problem is to come up with test cases. Coming up with good test cases can be an art, but I typically like to cover one happy path or an average case. And any interesting edge cases. This can be tricky as it depends on the problem. Remember that the interview is a dialogue, so understanding the problem is best done as a dialog as well. Asking questions, like Should this be done in place?... Does the ordering beyond the left/right of the partition matter? Create simple test cases and try to talk with your interviewer to see if they believe you get the idea. NEVER leave any stones unturned, keep asking until you perfectly understand the questions!!!
 
 ## MATCH:
 

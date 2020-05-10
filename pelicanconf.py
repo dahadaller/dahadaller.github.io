@@ -20,14 +20,14 @@ LANDING_PAGE_ABOUT = {'title': 'My blog',
                       'details': """<p>This website contains Info that might be interesting for you, enjoy!</p>"""}
 
 
-PROJECTS = [{'name': 'Blog-o-matic', 'url': 'https://github.com/iranzo/blog-o-matic',
-             'description': 'Canned blog automation for quickly setting up a blog with Pelican'},
-            {'name': 'Citellus', 'url': 'https://citellus.org',
-             'description': 'Troubleshooting automation tool with easy to contribute rules'},
-            {'name': 'Pablo Iranzo Blog', 'url': 'https://iranzo.github.io',
-             'description': 'Other projects at Github website'},
-            {'name': 'Redken Telegram BOT', 'url': 'https://t.me/redken_bot',
-             'description': 'A Telegram bot with support for Karma, RSS Feeds, Quotes, etc'}]
+# PROJECTS = [{'name': 'Blog-o-matic', 'url': 'https://github.com/iranzo/blog-o-matic',
+#              'description': 'Canned blog automation for quickly setting up a blog with Pelican'},
+#             {'name': 'Citellus', 'url': 'https://citellus.org',
+#              'description': 'Troubleshooting automation tool with easy to contribute rules'},
+#             {'name': 'Pablo Iranzo Blog', 'url': 'https://iranzo.github.io',
+#              'description': 'Other projects at Github website'},
+#             {'name': 'Redken Telegram BOT', 'url': 'https://t.me/redken_bot',
+#              'description': 'A Telegram bot with support for Karma, RSS Feeds, Quotes, etc'}]
 
 
 LINKS = (('Redken on telegram', 'https://t.me/redken_bot'),

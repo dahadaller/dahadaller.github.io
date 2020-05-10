@@ -1,10 +1,3 @@
-title: About
-layout: post
-date: 2016-06-02 17:27:47 +0200
-comments: true
-tags: blog-o-matic
-description:
-
 # CCNY_Prep
 
 This is a Blog meant to keep track of our interview preparation progress. 

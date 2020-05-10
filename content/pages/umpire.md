@@ -1,7 +1,5 @@
-Title: Breaking Down Interview Questions With UMPIRE
+Title: UMPIRE
 Date: 2020-05-09 11:12
-Category: Reference
-Tags: UMPIRE
 
 
 For any problem -- whether in interviews, or studying -- one must always create a plan of attack. The UMPIRE method is one way to create such a plan, and find your solution. It's especially helpful when you're completely lost as to how to solve a given problem. 

@@ -1,7 +1,7 @@
 Title: 242 Valid Anagram
 Date: 2020-05-10 11:30
 Authors: David Hadaller
-Tags, Bloomberg, LeetCode
+Tags: Bloomberg, LeetCode
 
 The posts in this series (each with the tag `Bloomberg`) contain problems taken from [this list](https://leetcode.com/discuss/interview-question/439548/Bloomberg-Phone-Interview-Questions) of Bloomberg phone interview problems. In this post, we solve LeetCode's [242 Valid Anagram](https://leetcode.com/problems/valid-anagram/). 
 
@@ -52,7 +52,7 @@ class Solution:
 
 ### Solution using `collections.defaultdict`
 
-The `defaultdict` class is covered in the [Stacks, Queues, Heaps, and Hash Tables in Python]({filename}useful_python_libraries.md) post. Where a Python dictionary normally throws a `KeyError` if you try to retrieve a value with a key that is not in the dictionary, `defaultdict` will just create a new key, value pair with a default value.
+The `defaultdict` class is covered in the [Stacks, Queues, Heaps, and Hash Tables in Python]({filename}useful_python_libraries.md) post. Where a Python dictionary normally throws a `KeyError` if you try to retrieve a value with a key that is not in the dictionary, `defaultdict` will just create a new key-value pair with a default value.
 
 
 ```python

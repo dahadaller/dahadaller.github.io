@@ -23,12 +23,12 @@ This week we will be covering the fundamentals of *linked lists* and common ways
     * [Reverse Linked List - LeetCode](https://leetcode.com/problems/reverse-linked-list/)
     * [Linked List Cycle - LeetCode](https://leetcode.com/problems/linked-list-cycle/)
     * [Add Two Numbers - LeetCode](https://leetcode.com/problems/add-two-numbers/)
-    * [Odd Even Linked List - LeetCode](https://leetcode.com/problems/odd-even-linked-list/)
 
 ### Wednesday
 
 Read the UMPIRE method post [here]({filename}/pages/umpire.md) and follow the steps (Understand, Match, Prototype, Implement, Review, and Evaluate) as you solve the problems. Take special care to match based on the linked list designed patterns learned on Monday, and to sketch visualizations / write pseudo code on a notepad near your computer. Pointer Bookeeping (demonstrated in [this lecture](https://www.youtube.com/watch?list=PLrT2tZ9JRrf65ueO-CGGT_Y8pfZfHv0vR&v=RH9-7SPVZw4)) can be a helpful tool for linked list diagramming.
 
+* [Odd Even Linked List - LeetCode](https://leetcode.com/problems/odd-even-linked-list/)
 * [Swap Nodes in Pairs - LeetCode](https://leetcode.com/problems/swap-nodes-in-pairs/)
 * [Rotate List - LeetCode](https://leetcode.com/problems/rotate-list/description/)
 * [Partition List - LeetCode](https://leetcode.com/problems/partition-list/)

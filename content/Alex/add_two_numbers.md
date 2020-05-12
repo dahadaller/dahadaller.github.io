@@ -1,7 +1,7 @@
 Title: Add Two Numbers
 Date: 2020-05-10 22:30
 Authors: Alex Matson
-Tags: LeetCode
+Tags: LeetCode, Week 1
 
 This post will cover my solution in Python 3 for LeetCode's [Add Two Numbers](https://leetcode.com/problems/add-two-numbers/) problem. The problem wants us to add two numbers (`l1` and `l2` that are encoded as linked lists, such that each digit is a linked list node. In this scheme, the digits in the linked list are ordered from least significant to most signficant. Thus, the number `254` would be represented as the linked list `4 -> 5 -> 2 -> None`. 
 

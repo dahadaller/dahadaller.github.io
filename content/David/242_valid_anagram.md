@@ -1,4 +1,4 @@
-Title: 242 Valid Anagram
+Title: 242 Valid Anagram (David)
 Date: 2020-05-10 11:30
 Authors: David Hadaller
 Tags: Bloomberg, LeetCode

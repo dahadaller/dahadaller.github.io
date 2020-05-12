@@ -26,7 +26,7 @@ This week we will be covering the fundamentals of *linked lists* and common ways
 
 ### Wednesday
 
-Read the UMPIRE method post [here]({filename}/pages/umpire.md) and follow the steps (Understand, Match, Prototype, Implement, Review, and Evaluate) as you solve the problems. Take special care to match based on the linked list designed patterns learned on Monday, and to sketch visualizations / write pseudo code on a notepad near your computer. Pointer Bookeeping (demonstrated in [this lecture](https://www.youtube.com/watch?list=PLrT2tZ9JRrf65ueO-CGGT_Y8pfZfHv0vR&v=RH9-7SPVZw4)) can be a helpful tool for linked list diagramming.
+Read the UMPIRE method post [here]({filename}/pages/umpire.md) and follow the steps (Understand, Match, Prototype, Implement, Review, and Evaluate) as you solve the problems. Take special care to match based on the linked list designed patterns learned on Monday, and to sketch visualizations / write pseudo code on a notepad near your computer. Pointer Bookeeping (demonstrated in [this lecture](https://www.youtube.com/watch?list=PLrT2tZ9JRrf65ueO-CGGT_Y8pfZfHv0vR&v=RH9-7SPVZw4)) can be a helpful tool for linked list diagramming. Also, for a refresher on how pointers work in python read this article on [python variables and memory management](http://foobarnbaz.com/2012/07/08/understanding-python-variables/) and/or this passage about [simulating pointers in python](https://realpython.com/pointers-in-python/#simulating-pointers-in-python).
 
 * [Odd Even Linked List - LeetCode](https://leetcode.com/problems/odd-even-linked-list/)
 * [Swap Nodes in Pairs - LeetCode](https://leetcode.com/problems/swap-nodes-in-pairs/)

@@ -1,6 +1,6 @@
 # CCNY_Prep
 
-This is a Blog meant to keep track of our interview preparation progress. 
+[CCNY_Prep](https://dahadaller.github.io/) is a blog meant to keep track of our interview preparation progress. There we post in-depth explanations of our solutions to LeetCode prectice problems. 
 
 This GitHub Pages blog relies on:
 - [travis-ci.org](https://travis-ci.org) for automating the update and generation process
@@ -60,7 +60,7 @@ After some seconds, - [travis-ci](https://travis-ci.org) build the site with Pel
 Generally, blog posts can be about any topic you think would be helpful to the group, and can be written in any way you choose. However, blog posts that are in response to the weekly excercises need to have certain headers in the YAML preamble so that Pelican can categorize them correctly on the final site. For example, a post made in response to [Week 1 Excercises](https://dahadaller.github.io/blog/2020/05/09/week-1-excercises/) would have a YAML headers like this:
 
 ```markdown
-Title: David's Week 1 Excercises
+Title: 237 Delete Node in a Linked List (David)
 Date: 2020-05-09 11:15
 Authors: David Hadaller
 Tags: Week 1

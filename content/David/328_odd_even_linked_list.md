@@ -5,7 +5,7 @@ Tags: Week 1, LeetCode
 
 
 
-This code solves the [Odd Even Linked List](https://leetcode.com/problems/odd-even-linked-list/) problem from LeetCode.
+This post solves the [Odd Even Linked List](https://leetcode.com/problems/odd-even-linked-list/) problem from LeetCode.
 
 >Given a singly linked list, group all odd nodes together followed by the even nodes.  Please note here we are talking about the node number and not the value  in the nodes.
 >

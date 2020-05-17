@@ -1,4 +1,4 @@
-Title: 328 Odd Even Linked List (Kieran)
+Title: 160 Intersection of Two Linked Lists (Kieran)
 Date: 2020-05-15
 Authors: Kieran Duggan
 Tags: LeetCode

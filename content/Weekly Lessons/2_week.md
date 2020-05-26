@@ -22,7 +22,9 @@ This week we will be covering the fundamentals of *hash tables, heaps, stacks, a
 
 
 ### Thursday
+
 Do the following readings (important):
+
 * [Hash Tables · codepath/compsci_guides Wiki](https://github.com/codepath/compsci_guides/wiki/Hash-Tables)
 * [Heaps · codepath/compsci_guides Wiki](https://github.com/codepath/compsci_guides/wiki/Heaps)
 * [Stacks and Queues · codepath/compsci_guides Wiki](https://github.com/codepath/compsci_guides/wiki/Stacks-and-Queues)

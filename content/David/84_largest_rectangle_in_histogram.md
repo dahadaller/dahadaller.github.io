@@ -11,12 +11,12 @@ This post is an in-depth explanation of the [Largest Rectangle in Histogram](htt
 >
 > 
 >
->![img](images/84_histogram.png)
+>![img]({filename}/images/84_histogram.png)
 > Above is a histogram where width of each bar is 1, given height = `[2,1,5,6,2,3]`.
 >
 > 
 >
->![img](images/84_histogram_area.png)
+>![img]({filename}/images/84_histogram_area.png)
 > The largest rectangle is shown in the shaded area, which has area = `10` unit.
 >
 >
@@ -63,6 +63,6 @@ def largestRectangleArea(self, height):
 
 
 
-![84_fig_1](images/84_fig_1.jpg)
+![84_fig_1]({filename}/images/84_fig_1.jpg)
 
-![84_fig_2](images/84_fig_2.jpg)
+![84_fig_2]({filename}/images/84_fig_2.jpg)

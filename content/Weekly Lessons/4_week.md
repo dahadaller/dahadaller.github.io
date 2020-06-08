@@ -1,3 +1,7 @@
+Title: Week 4 Excercises
+Date: 2020-06-02 03:26
+Tags: Week 4, Excercises, LeetCode
+
 ## Goals
 
 - Know how to search for values in binary search tree in optimal way
@@ -18,8 +22,6 @@
 - [Binary Trees 2nd Largest Node Desogn Pattern](https://github.com/codepath/compsci_guides/wiki/Binary-Trees-2nd-Largest-Node)
 
 
-
-
 ## Wednesday
 
 * [Invert Binary Tree - LeetCode](https://leetcode.com/problems/invert-binary-tree/)
@@ -28,6 +30,8 @@
 * [Validate Binary Search Tree - LeetCode](https://leetcode.com/problems/validate-binary-search-tree/description/)
 * [Binary Tree Pruning - LeetCode](https://leetcode.com/problems/binary-tree-pruning/description/)
 * [Kth Smallest Element in a BST - LeetCode](https://leetcode.com/problems/kth-smallest-element-in-a-bst/description/)
+
+
 
 
 ## Saturday

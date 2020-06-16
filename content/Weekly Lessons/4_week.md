@@ -1,5 +1,5 @@
 Title: Week 4 Excercises
-Date: 2020-06-02 03:26
+Date: 2020-06-07 03:26
 Tags: Week 4, Excercises, LeetCode
 
 ## Goals

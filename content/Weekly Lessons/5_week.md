@@ -13,6 +13,7 @@ Keep in mind that during interviews coding questions are usually allotted 30-40 
 
 ## Tuesday
 Read the following articles and watch the youtube playlist that walks through graph problems.
+
 * [Graphs · codepath/compsci_guides Wiki](https://github.com/codepath/compsci_guides/wiki/Graphs)
 * [Graph Traversals · codepath/compsci_guides Wiki](https://github.com/codepath/compsci_guides/wiki/Graph-Traversals)
 * [Topological Sort · codepath/compsci_guides Wiki](https://github.com/codepath/compsci_guides/wiki/Topological-Sort)

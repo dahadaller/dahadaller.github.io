@@ -1,5 +1,5 @@
 Title: Week 5 Excercises
-Date: 2020-06-016 08:26
+Date: 2020-06-16 08:26
 Tags: Week 5, Excercises, LeetCode
 
 ## Goals

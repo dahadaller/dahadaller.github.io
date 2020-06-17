@@ -1,0 +1,962 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>CCNY_Prep - Week 1</title><link href="/" rel="alternate"></link><link href="/feeds/tag_week-1.atom.xml" rel="self"></link><id>/</id><updated>2020-05-15T23:30:00-04:00</updated><subtitle>This is where I do test things</subtitle><entry><title>328 Odd Even Linked List (David)</title><link href="/blog/2020/05/15/328-odd-even-linked-list-david/" rel="alternate"></link><published>2020-05-15T23:30:00-04:00</published><updated>2020-05-15T23:30:00-04:00</updated><author><name>David Hadaller</name></author><id>tag:None,2020-05-15:/blog/2020/05/15/328-odd-even-linked-list-david/</id><summary type="html">&lt;p&gt;This post solves the &lt;a href="https://leetcode.com/problems/odd-even-linked-list/"&gt;Odd Even Linked List&lt;/a&gt; problem from&amp;nbsp;LeetCode.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Given a singly linked list, group all odd nodes together followed by the even nodes.  Please note here we are talking about the node number and not the value  in the&amp;nbsp;nodes.&lt;/p&gt;
+&lt;p&gt;You should try to do it in …&lt;/p&gt;&lt;/blockquote&gt;</summary><content type="html">&lt;p&gt;This post solves the &lt;a href="https://leetcode.com/problems/odd-even-linked-list/"&gt;Odd Even Linked List&lt;/a&gt; problem from&amp;nbsp;LeetCode.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Given a singly linked list, group all odd nodes together followed by the even nodes.  Please note here we are talking about the node number and not the value  in the&amp;nbsp;nodes.&lt;/p&gt;
+&lt;p&gt;You should try to do it in place. The program should run in O(1) space complexity and O(nodes) time&amp;nbsp;complexity.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Example&amp;nbsp;1:&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;Input: 1-&amp;gt;2-&amp;gt;3-&amp;gt;4-&amp;gt;5-&amp;gt;NULL
+Output: 1-&amp;gt;3-&amp;gt;5-&amp;gt;2-&amp;gt;4-&amp;gt;NULL&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Example&amp;nbsp;2:&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;Input: 2-&amp;gt;1-&amp;gt;3-&amp;gt;5-&amp;gt;6-&amp;gt;4-&amp;gt;7-&amp;gt;NULL
+Output: 2-&amp;gt;3-&amp;gt;6-&amp;gt;7-&amp;gt;1-&amp;gt;5-&amp;gt;4-&amp;gt;NULL&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The relative order inside both the even and odd groups should remain as it was in the&amp;nbsp;input.&lt;/li&gt;
+&lt;li&gt;The first node is considered odd, the second node even and so on&amp;nbsp;&amp;#8230;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c1"&gt;# Definition for singly-linked list.&lt;/span&gt;
+&lt;span class="c1"&gt;# class ListNode:&lt;/span&gt;
+&lt;span class="c1"&gt;#     def __init__(self, val=0, next=None):&lt;/span&gt;
+&lt;span class="c1"&gt;#         self.val = val&lt;/span&gt;
+&lt;span class="c1"&gt;#         self.next = next&lt;/span&gt;
+
+
+&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Solution&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;oddEvenList&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;head&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;ListNode&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;ListNode&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="ow"&gt;not&lt;/span&gt; &lt;span class="n"&gt;head&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="k"&gt;return&lt;/span&gt;
+
+        &lt;span class="n"&gt;odds_list&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;head&lt;/span&gt;
+        &lt;span class="n"&gt;evens_list&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;head&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;next&lt;/span&gt;
+
+        &lt;span class="n"&gt;trail_ptr&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;head&lt;/span&gt;
+        &lt;span class="n"&gt;lead_ptr&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;head&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;next&lt;/span&gt;
+
+
+        &lt;span class="n"&gt;trail_ptr_index&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;
+
+        &lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="n"&gt;lead_ptr&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+
+            &lt;span class="c1"&gt;# for each list element, make it point&lt;/span&gt;
+            &lt;span class="c1"&gt;# to the next element over&lt;/span&gt;
+
+            &lt;span class="c1"&gt;# +-----+&lt;/span&gt;
+            &lt;span class="c1"&gt;# |     |&lt;/span&gt;
+            &lt;span class="c1"&gt;# |     v&lt;/span&gt;
+            &lt;span class="c1"&gt;# 1  2-&amp;gt;3-&amp;gt;4-&amp;gt;5-&amp;gt;NULL&lt;/span&gt;
+            &lt;span class="c1"&gt;# |  |&lt;/span&gt;
+            &lt;span class="c1"&gt;# tr lead_ptr &lt;/span&gt;
+            &lt;span class="n"&gt;trail_ptr&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;next&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;lead_ptr&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;next&lt;/span&gt;
+
+            &lt;span class="n"&gt;old_trail_ptr&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;trail_ptr&lt;/span&gt;
+            &lt;span class="n"&gt;trail_ptr&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;lead_ptr&lt;/span&gt;
+            &lt;span class="n"&gt;lead_ptr&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;lead_ptr&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;next&lt;/span&gt;
+
+            &lt;span class="n"&gt;trail_ptr_index&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;
+
+
+        &lt;span class="c1"&gt;# the following if statements are needed because the &lt;/span&gt;
+        &lt;span class="c1"&gt;# trail_ptr (abbreviated tr in diagrams) falls on odd/even&lt;/span&gt;
+        &lt;span class="c1"&gt;# list element at the end of the while loop depending on whether the total&lt;/span&gt;
+        &lt;span class="c1"&gt;# number of elements (list index) is odd or even&lt;/span&gt;
+
+        &lt;span class="c1"&gt;# 1-&amp;gt;2-&amp;gt;3-&amp;gt;4-&amp;gt;5-&amp;gt;NULL  (tr falls on odd)&lt;/span&gt;
+        &lt;span class="c1"&gt;#          |  |   |&lt;/span&gt;
+        &lt;span class="c1"&gt;#     old_tr  tr  lead_ptr&lt;/span&gt;
+
+        &lt;span class="c1"&gt;# 1-&amp;gt;2-&amp;gt;3-&amp;gt;4-&amp;gt;5-&amp;gt;6-&amp;gt;NULL (tr falls on even)&lt;/span&gt;
+        &lt;span class="c1"&gt;#             |  |   |&lt;/span&gt;
+        &lt;span class="c1"&gt;#         old_tr tr  lead_ptr&lt;/span&gt;
+
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;trail_ptr_index&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="n"&gt;old_trail_ptr&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;next&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;evens_list&lt;/span&gt; &lt;span class="c1"&gt;# stitch lists together&lt;/span&gt;
+            &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;odds_list&lt;/span&gt; &lt;span class="c1"&gt;# return head of stiched lists&lt;/span&gt;
+
+        &lt;span class="k"&gt;else&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="n"&gt;trail_ptr&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;next&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;evens_list&lt;/span&gt; &lt;span class="c1"&gt;# stitch lists together&lt;/span&gt;
+            &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;odds_list&lt;/span&gt; &lt;span class="c1"&gt;# return head of stiched lists       &lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</content><category term="David"></category><category term="Week 1"></category><category term="LeetCode"></category></entry><entry><title>86 Partition List (David)</title><link href="/blog/2020/05/15/86-partition-list-david/" rel="alternate"></link><published>2020-05-15T23:30:00-04:00</published><updated>2020-05-15T23:30:00-04:00</updated><author><name>David Hadaller</name></author><id>tag:None,2020-05-15:/blog/2020/05/15/86-partition-list-david/</id><summary type="html">&lt;p&gt;This code solves the &lt;a href="https://leetcode.com/problems/partition-list/"&gt;Partition List&lt;/a&gt;&amp;nbsp;problem.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;        &lt;span class="n"&gt;Given&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="n"&gt;linked&lt;/span&gt; &lt;span class="n"&gt;list&lt;/span&gt; &lt;span class="k"&gt;and&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="n"&gt;value&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;partition&lt;/span&gt; &lt;span class="n"&gt;it&lt;/span&gt; &lt;span class="n"&gt;such&lt;/span&gt; &lt;span class="n"&gt;that&lt;/span&gt; &lt;span class="k"&gt;all&lt;/span&gt; &lt;span class="n"&gt;nodes&lt;/span&gt; &lt;span class="k"&gt;less&lt;/span&gt; &lt;span class="k"&gt;than&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;come&lt;/span&gt; &lt;span class="k"&gt;before&lt;/span&gt; &lt;span class="n"&gt;nodes&lt;/span&gt; &lt;span class="n"&gt;greater&lt;/span&gt; &lt;span class="k"&gt;than&lt;/span&gt; &lt;span class="k"&gt;or&lt;/span&gt; &lt;span class="n"&gt;equal&lt;/span&gt; &lt;span class="k"&gt;to&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;
+
+        &lt;span class="n"&gt;You&lt;/span&gt; &lt;span class="n"&gt;should&lt;/span&gt; &lt;span class="k"&gt;preserve&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;original&lt;/span&gt; &lt;span class="k"&gt;relative&lt;/span&gt; &lt;span class="k"&gt;order …&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/blockquote&gt;</summary><content type="html">&lt;p&gt;This code solves the &lt;a href="https://leetcode.com/problems/partition-list/"&gt;Partition List&lt;/a&gt;&amp;nbsp;problem.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;        &lt;span class="n"&gt;Given&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="n"&gt;linked&lt;/span&gt; &lt;span class="n"&gt;list&lt;/span&gt; &lt;span class="k"&gt;and&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="n"&gt;value&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;partition&lt;/span&gt; &lt;span class="n"&gt;it&lt;/span&gt; &lt;span class="n"&gt;such&lt;/span&gt; &lt;span class="n"&gt;that&lt;/span&gt; &lt;span class="k"&gt;all&lt;/span&gt; &lt;span class="n"&gt;nodes&lt;/span&gt; &lt;span class="k"&gt;less&lt;/span&gt; &lt;span class="k"&gt;than&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;come&lt;/span&gt; &lt;span class="k"&gt;before&lt;/span&gt; &lt;span class="n"&gt;nodes&lt;/span&gt; &lt;span class="n"&gt;greater&lt;/span&gt; &lt;span class="k"&gt;than&lt;/span&gt; &lt;span class="k"&gt;or&lt;/span&gt; &lt;span class="n"&gt;equal&lt;/span&gt; &lt;span class="k"&gt;to&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;
+
+        &lt;span class="n"&gt;You&lt;/span&gt; &lt;span class="n"&gt;should&lt;/span&gt; &lt;span class="k"&gt;preserve&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;original&lt;/span&gt; &lt;span class="k"&gt;relative&lt;/span&gt; &lt;span class="k"&gt;order&lt;/span&gt; &lt;span class="k"&gt;of&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;nodes&lt;/span&gt; &lt;span class="k"&gt;in&lt;/span&gt; &lt;span class="k"&gt;each&lt;/span&gt; &lt;span class="k"&gt;of&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;two&lt;/span&gt; &lt;span class="n"&gt;partitions&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;
+
+        &lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="n"&gt;Example&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;**&lt;/span&gt;
+
+        &lt;span class="o"&gt;```&lt;/span&gt;
+        &lt;span class="k"&gt;Input&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;head&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;
+        &lt;span class="k"&gt;Output&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;
+        &lt;span class="o"&gt;```&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;/blockquote&gt;
+&lt;p&gt;The following is an explanation of my implemention of the two-pointer solution given by LeetCode. My initial attempt (at the bottom of this post) only worked for lists of length greater than 3 and didn&amp;#8217;t pass the submission after multiple revisions, and it relied on 6 pointers, rather than&amp;nbsp;2.&lt;/p&gt;
+&lt;h3 id="leetcodes-two-pointer-solution"&gt;LeetCode&amp;#8217;s Two-Pointer Solution&lt;a class="headerlink" href="#leetcodes-two-pointer-solution" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;For a more in depth explanation, check the solution &lt;a href="https://leetcode.com/problems/partition-list/solution/"&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;The trick I learned from this problem is that lists can be grown in the direction they point without loosing the head, if you save it at the beginning as is done on lines 20 and 21&amp;nbsp;below.&lt;/p&gt;
+&lt;p&gt;After all is said and done, a list that starts out with the following&amp;nbsp;arrangement:&lt;/p&gt;
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;1 -&amp;gt; 2 -&amp;gt; 2 -&amp;gt; 4 -&amp;gt; 3 -&amp;gt; 2 -&amp;gt; None&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;Will have a pointer arrangement that looks like&amp;nbsp;this:&lt;/p&gt;
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;ltx_head&lt;/span&gt;
+&lt;span class="err"&gt;|&lt;/span&gt;
+&lt;span class="err"&gt;| gtx_head&lt;/span&gt;
+&lt;span class="err"&gt;|  |&lt;/span&gt;
+&lt;span class="err"&gt;|  |&lt;/span&gt;
+&lt;span class="err"&gt;|  +-----------+    +---------+&lt;/span&gt;
+&lt;span class="err"&gt;v              v    |         v&lt;/span&gt;
+&lt;span class="err"&gt;1 -&amp;gt; 2 -&amp;gt; 2    4 -&amp;gt; 3    2   None&lt;/span&gt;
+&lt;span class="err"&gt;          |              ^&lt;/span&gt;
+&lt;span class="err"&gt;          |              |&lt;/span&gt;
+&lt;span class="err"&gt;          +--------------+&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;After this, &lt;code&gt;gtx_head&lt;/code&gt; can be stiched to the back of &lt;code&gt;ltx_head&lt;/code&gt; to return the final&amp;nbsp;answer.&lt;/p&gt;
+&lt;p&gt;Here&amp;#8217;s the&amp;nbsp;code:&lt;/p&gt;
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c1"&gt;# Definition for singly-linked list.&lt;/span&gt;
+&lt;span class="c1"&gt;# class ListNode:&lt;/span&gt;
+&lt;span class="c1"&gt;#     def __init__(self, val=0, next=None):&lt;/span&gt;
+&lt;span class="c1"&gt;#         self.val = val&lt;/span&gt;
+&lt;span class="c1"&gt;#         self.next = next&lt;/span&gt;
+
+&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Solution&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;object&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;partition&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;head&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="sd"&gt;&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+&lt;span class="sd"&gt;        :type head: ListNode&lt;/span&gt;
+&lt;span class="sd"&gt;        :type x: int&lt;/span&gt;
+&lt;span class="sd"&gt;        :rtype: ListNode&lt;/span&gt;
+&lt;span class="sd"&gt;        &amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+
+        &lt;span class="c1"&gt;#ltx = &amp;quot;less than x&amp;quot;&lt;/span&gt;
+        &lt;span class="c1"&gt;#gtx = &amp;quot;greater than (or equal to) x&amp;quot;&lt;/span&gt;
+
+        &lt;span class="c1"&gt;#ltx_head.next and gtx_head.next will still point to &lt;/span&gt;
+        &lt;span class="c1"&gt;# heads of lists afer ltx and gtx have been incremented&lt;/span&gt;
+        &lt;span class="n"&gt;ltx&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;ltx_head&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;ListNode&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; 
+        &lt;span class="n"&gt;gtx&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;gtx_head&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;ListNode&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+        &lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="n"&gt;head&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+
+            &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;head&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;val&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+                &lt;span class="n"&gt;ltx&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;next&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;head&lt;/span&gt;
+                &lt;span class="n"&gt;ltx&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;ltx&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;next&lt;/span&gt;
+            &lt;span class="k"&gt;else&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+
+                &lt;span class="n"&gt;gtx&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;next&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;head&lt;/span&gt;
+                &lt;span class="n"&gt;gtx&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;gtx&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;next&lt;/span&gt;
+
+            &lt;span class="n"&gt;head&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;head&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;next&lt;/span&gt;
+
+        &lt;span class="n"&gt;gtx&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;next&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kc"&gt;None&lt;/span&gt;
+        &lt;span class="n"&gt;ltx&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;next&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;gtx_head&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;next&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;ltx_head&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;next&lt;/span&gt;                 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;h3 id="my-original-solution"&gt;My Original Solution&lt;a class="headerlink" href="#my-original-solution" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h3&gt;
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Solution&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;partition&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;head&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;ListNode&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;ListNode&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="ow"&gt;not&lt;/span&gt; &lt;span class="n"&gt;head&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="k"&gt;return&lt;/span&gt;
+
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="ow"&gt;not&lt;/span&gt; &lt;span class="n"&gt;head&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;next&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;head&lt;/span&gt;
+
+        &lt;span class="n"&gt;trail&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;trail_ltx&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;head&lt;/span&gt;
+        &lt;span class="n"&gt;mid&lt;/span&gt;   &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;mid_ltx&lt;/span&gt;   &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;head&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;next&lt;/span&gt;
+        &lt;span class="n"&gt;lead&lt;/span&gt;  &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;lead_ltx&lt;/span&gt;  &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;head&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;next&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;next&lt;/span&gt;
+
+        &lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="n"&gt;mid&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;head&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+            &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;mid&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;val&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+
+                &lt;span class="n"&gt;trail_ltx&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;next&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;mid&lt;/span&gt;
+                &lt;span class="n"&gt;mid&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;next&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;mid_ltx&lt;/span&gt;
+
+                &lt;span class="n"&gt;trail&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;next&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;lead&lt;/span&gt;
+
+                &lt;span class="n"&gt;trail_ltx&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;mid&lt;/span&gt;
+                &lt;span class="n"&gt;mid_ltx&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;mid&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;next&lt;/span&gt;
+
+            &lt;span class="n"&gt;trail&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;mid&lt;/span&gt;
+            &lt;span class="n"&gt;mid&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;lead&lt;/span&gt;
+            &lt;span class="n"&gt;lead&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kc"&gt;None&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="ow"&gt;not&lt;/span&gt; &lt;span class="n"&gt;lead&lt;/span&gt; &lt;span class="k"&gt;else&lt;/span&gt; &lt;span class="n"&gt;lead&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;next&lt;/span&gt;
+
+
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;head&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</content><category term="David"></category><category term="Week 1"></category><category term="LeetCode"></category><category term="Unsolved"></category></entry><entry><title>141 Linked List Cycle (David)</title><link href="/blog/2020/05/11/141-linked-list-cycle-david/" rel="alternate"></link><published>2020-05-11T23:30:00-04:00</published><updated>2020-05-11T23:30:00-04:00</updated><author><name>David Hadaller</name></author><id>tag:None,2020-05-11:/blog/2020/05/11/141-linked-list-cycle-david/</id><summary type="html">&lt;p&gt;This code solves the  &lt;a href="https://leetcode.com/problems/linked-list-cycle/"&gt;Linked List Cycle &lt;/a&gt; problem. If the hare (a pointer)  starts &lt;em&gt;ahead&lt;/em&gt; of the turtle (also a pointer) and the hare ends up passing the turtle from behind, then we know there must have been a cycle in the race course (the linked list). This is a …&lt;/p&gt;</summary><content type="html">&lt;p&gt;This code solves the  &lt;a href="https://leetcode.com/problems/linked-list-cycle/"&gt;Linked List Cycle &lt;/a&gt; problem. If the hare (a pointer)  starts &lt;em&gt;ahead&lt;/em&gt; of the turtle (also a pointer) and the hare ends up passing the turtle from behind, then we know there must have been a cycle in the race course (the linked list). This is a &lt;a href="https://github.com/codepath/compsci_guides/wiki/Linked-List-Two-Pointer"&gt;Two-Pointer&lt;/a&gt;&amp;nbsp;problem. &lt;/p&gt;
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c1"&gt;# 141. Linked List Cycle&lt;/span&gt;
+
+&lt;span class="c1"&gt;# Definition for singly-linked list.&lt;/span&gt;
+&lt;span class="c1"&gt;# class ListNode:&lt;/span&gt;
+&lt;span class="c1"&gt;#     def __init__(self, x):&lt;/span&gt;
+&lt;span class="c1"&gt;#         self.val = x&lt;/span&gt;
+&lt;span class="c1"&gt;#         self.next = None&lt;/span&gt;
+
+&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Solution&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;hasCycle&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;head&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;ListNode&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="nb"&gt;bool&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="ow"&gt;not&lt;/span&gt; &lt;span class="n"&gt;head&lt;/span&gt; &lt;span class="ow"&gt;or&lt;/span&gt; &lt;span class="ow"&gt;not&lt;/span&gt; &lt;span class="n"&gt;head&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;next&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="kc"&gt;False&lt;/span&gt;
+
+        &lt;span class="n"&gt;hare&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;head&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;next&lt;/span&gt;
+        &lt;span class="n"&gt;turtle&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;head&lt;/span&gt;
+
+        &lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="n"&gt;hare&lt;/span&gt; &lt;span class="ow"&gt;and&lt;/span&gt; &lt;span class="n"&gt;hare&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;next&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+
+            &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;hare&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;next&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="n"&gt;turtle&lt;/span&gt; &lt;span class="ow"&gt;or&lt;/span&gt; &lt;span class="n"&gt;turtle&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="n"&gt;hare&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+                &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="kc"&gt;True&lt;/span&gt;
+            &lt;span class="k"&gt;else&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+                &lt;span class="n"&gt;turtle&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;turtle&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;next&lt;/span&gt;
+                &lt;span class="n"&gt;hare&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;hare&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;next&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;next&lt;/span&gt;
+
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="kc"&gt;False&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</content><category term="David"></category><category term="Week 1"></category><category term="LeetCode"></category></entry><entry><title>2 Add Two Numbers (David)</title><link href="/blog/2020/05/11/2-add-two-numbers-david/" rel="alternate"></link><published>2020-05-11T23:30:00-04:00</published><updated>2020-05-11T23:30:00-04:00</updated><author><name>David Hadaller</name></author><id>tag:None,2020-05-11:/blog/2020/05/11/2-add-two-numbers-david/</id><summary type="html">&lt;p&gt;This is the answer to the &lt;a href="https://leetcode.com/problems/add-two-numbers/"&gt;Add Two Numbers - LeetCode&lt;/a&gt; problem. Please don&amp;#8217;t use it; the solution is very very inefficient. Here are some reasons this code&amp;nbsp;sucks:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Do three separate pass throughs on l1, l2 and creating a linked list from their integer&amp;nbsp;sum&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;digit.val * (radix ** index_a …&lt;/code&gt;&lt;/li&gt;&lt;/ul&gt;</summary><content type="html">&lt;p&gt;This is the answer to the &lt;a href="https://leetcode.com/problems/add-two-numbers/"&gt;Add Two Numbers - LeetCode&lt;/a&gt; problem. Please don&amp;#8217;t use it; the solution is very very inefficient. Here are some reasons this code&amp;nbsp;sucks:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Do three separate pass throughs on l1, l2 and creating a linked list from their integer&amp;nbsp;sum&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;digit.val * (radix ** index_a)&lt;/code&gt; is a very expensive&amp;nbsp;operation.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c1"&gt;# Definition for singly-linked list.&lt;/span&gt;
+&lt;span class="c1"&gt;# class ListNode:&lt;/span&gt;
+&lt;span class="c1"&gt;#     def __init__(self, val=0, next=None):&lt;/span&gt;
+&lt;span class="c1"&gt;#         self.val = val&lt;/span&gt;
+&lt;span class="c1"&gt;#         self.next = next&lt;/span&gt;
+&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Solution&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;addTwoNumbers&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;l1&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;ListNode&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;l2&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;ListNode&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;ListNode&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+
+        &lt;span class="n"&gt;radix&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt;
+        &lt;span class="n"&gt;running_sum&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;
+
+        &lt;span class="c1"&gt;# iteratively sum l1&lt;/span&gt;
+        &lt;span class="n"&gt;digit&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;l1&lt;/span&gt;
+        &lt;span class="n"&gt;index_a&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;
+        &lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="n"&gt;digit&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="n"&gt;running_sum&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="n"&gt;digit&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;val&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;radix&lt;/span&gt; &lt;span class="o"&gt;**&lt;/span&gt; &lt;span class="n"&gt;index_a&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+            &lt;span class="n"&gt;digit&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;digit&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;next&lt;/span&gt;
+            &lt;span class="n"&gt;index_a&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;
+        &lt;span class="n"&gt;l1_sum&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;running_sum&lt;/span&gt;
+
+        &lt;span class="c1"&gt;# iteratively sum l2&amp;#39;s digits to l1 for running_sum&lt;/span&gt;
+        &lt;span class="n"&gt;digit&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;l2&lt;/span&gt;
+        &lt;span class="n"&gt;index_b&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;
+        &lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="n"&gt;digit&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="n"&gt;running_sum&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="n"&gt;digit&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;val&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;radix&lt;/span&gt; &lt;span class="o"&gt;**&lt;/span&gt; &lt;span class="n"&gt;index_b&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+            &lt;span class="n"&gt;digit&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;digit&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;next&lt;/span&gt;
+            &lt;span class="n"&gt;index_b&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;
+
+        &lt;span class="n"&gt;total_sum&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;running_sum&lt;/span&gt;
+
+        &lt;span class="n"&gt;ret_list&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kc"&gt;None&lt;/span&gt;
+
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="ow"&gt;not&lt;/span&gt; &lt;span class="n"&gt;running_sum&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;radix&lt;/span&gt; &lt;span class="o"&gt;**&lt;/span&gt; &lt;span class="n"&gt;index_a&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="ow"&gt;or&lt;/span&gt; &lt;span class="ow"&gt;not&lt;/span&gt; &lt;span class="n"&gt;running_sum&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;radix&lt;/span&gt; &lt;span class="o"&gt;**&lt;/span&gt; &lt;span class="n"&gt;index_b&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+            &lt;span class="n"&gt;index&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;max&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;index_a&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;index_b&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="k"&gt;else&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="n"&gt;index&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;max&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;index_a&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;index_b&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+
+        &lt;span class="c1"&gt;# create the return list    &lt;/span&gt;
+        &lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="n"&gt;index&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+
+            &lt;span class="n"&gt;digit&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;total_sum&lt;/span&gt; &lt;span class="o"&gt;//&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;radix&lt;/span&gt; &lt;span class="o"&gt;**&lt;/span&gt; &lt;span class="n"&gt;index&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+            &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;total_sum&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;//&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;radix&lt;/span&gt; &lt;span class="o"&gt;**&lt;/span&gt; &lt;span class="n"&gt;index&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;=&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;digit&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+            &lt;span class="n"&gt;total_sum&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;total_sum&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;radix&lt;/span&gt; &lt;span class="o"&gt;**&lt;/span&gt; &lt;span class="n"&gt;index&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+            &lt;span class="n"&gt;index&lt;/span&gt; &lt;span class="o"&gt;-=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;
+
+            &lt;span class="n"&gt;ret_list_old&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;ret_list&lt;/span&gt;
+            &lt;span class="n"&gt;ret_list&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;ListNode&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;digit&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+            &lt;span class="n"&gt;ret_list&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;next&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;ret_list_old&lt;/span&gt;
+
+
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;ret_list&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</content><category term="David"></category><category term="Week 1"></category><category term="LeetCode"></category><category term="Draft"></category></entry><entry><title>206 Reverse Linked List (David)</title><link href="/blog/2020/05/11/206-reverse-linked-list-david/" rel="alternate"></link><published>2020-05-11T23:30:00-04:00</published><updated>2020-05-11T23:30:00-04:00</updated><author><name>David Hadaller</name></author><id>tag:None,2020-05-11:/blog/2020/05/11/206-reverse-linked-list-david/</id><summary type="html">&lt;p&gt;This problem is taken from &lt;a href="https://leetcode.com/problems/reverse-linked-list/"&gt;Reverse Linked List&lt;/a&gt;.  Here I present recursive and iterative&amp;nbsp;solutions. &lt;/p&gt;
+&lt;h3 id="recursive-solution"&gt;Recursive Solution&lt;a class="headerlink" href="#recursive-solution" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;The intuition for the recursive solution is as follows: Suppose our list looks like&amp;nbsp;this &lt;/p&gt;
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;1 -&amp;gt; [2 -&amp;gt; 3 -&amp;gt; 4 -&amp;gt; 5 -&amp;gt; ...] &lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;where the first element of the linked list is called &lt;code&gt;head&lt;/code&gt; and …&lt;/p&gt;</summary><content type="html">&lt;p&gt;This problem is taken from &lt;a href="https://leetcode.com/problems/reverse-linked-list/"&gt;Reverse Linked List&lt;/a&gt;.  Here I present recursive and iterative&amp;nbsp;solutions. &lt;/p&gt;
+&lt;h3 id="recursive-solution"&gt;Recursive Solution&lt;a class="headerlink" href="#recursive-solution" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;The intuition for the recursive solution is as follows: Suppose our list looks like&amp;nbsp;this &lt;/p&gt;
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;1 -&amp;gt; [2 -&amp;gt; 3 -&amp;gt; 4 -&amp;gt; 5 -&amp;gt; ...] &lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;where the first element of the linked list is called &lt;code&gt;head&lt;/code&gt; and the the bracketed portion of the linked list, which I call &lt;em&gt;the rest&lt;/em&gt;.  &lt;/p&gt;
+&lt;p&gt;The way we construct a reversed linked list from the &lt;code&gt;head&lt;/code&gt; and &lt;em&gt;the rest&lt;/em&gt; by the following&amp;nbsp;process:&lt;/p&gt;
+&lt;p&gt;First, run the reverse function on &lt;em&gt;the rest&lt;/em&gt;. &lt;code&gt;rev_head&lt;/code&gt; will point to the head of the already reversed portion of the list, and &lt;code&gt;rev_tail&lt;/code&gt; will point to the tail of this&amp;nbsp;portion.&lt;/p&gt;
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+2
+3&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;1 -&amp;gt; [n -&amp;gt; ... -&amp;gt; 5 -&amp;gt; 4 -&amp;gt; 3 -&amp;gt; 2]&lt;/span&gt;
+&lt;span class="err"&gt;|     |                          |&lt;/span&gt;
+&lt;span class="err"&gt;head rev_head                 rev_tail&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;Then place &lt;em&gt;the rest&lt;/em&gt; in front of the &lt;code&gt;head&lt;/code&gt; by assigning &lt;code&gt;rev_tail.next = head&lt;/code&gt; and &lt;code&gt;head.next = None&lt;/code&gt;. &lt;/p&gt;
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+2
+3&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;[n -&amp;gt; ... -&amp;gt; 5 -&amp;gt; 4 -&amp;gt; 3 -&amp;gt; 2] -&amp;gt; 1 -&amp;gt; None&lt;/span&gt;
+&lt;span class="err"&gt; |                          |     |    &lt;/span&gt;
+&lt;span class="err"&gt;rev_head               rev_tail  head &lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;The list is now fully&amp;nbsp;reversed.&lt;/p&gt;
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c1"&gt;# 206. Reverse Linked List&lt;/span&gt;
+&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Solution&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;reverseList&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;head&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;ListNode&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;ListNode&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+
+                &lt;span class="c1"&gt;# edge case of empty linked list&lt;/span&gt;
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="ow"&gt;not&lt;/span&gt; &lt;span class="n"&gt;head&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="k"&gt;return&lt;/span&gt;
+
+            &lt;span class="c1"&gt;# single node is our base case&lt;/span&gt;
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;head&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;next&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="kc"&gt;None&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; 
+            &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;head&lt;/span&gt;
+
+        &lt;span class="c1"&gt;# inductive step  &lt;/span&gt;
+        &lt;span class="k"&gt;else&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="c1"&gt;#this  call to reverseList() does not reverse in-place ...&lt;/span&gt;
+            &lt;span class="n"&gt;rev_head&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;reverseList&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;head&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;next&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; 
+                    &lt;span class="c1"&gt;# ... which means we still have access to head.next here&lt;/span&gt;
+            &lt;span class="n"&gt;rev_tail&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;head&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;next&lt;/span&gt; 
+            &lt;span class="n"&gt;head&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;next&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kc"&gt;None&lt;/span&gt; 
+            &lt;span class="n"&gt;rev_tail&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;next&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;head&lt;/span&gt;
+
+            &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;rev_head&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;h3 id="iterative-solution"&gt;Iterative Solution&lt;a class="headerlink" href="#iterative-solution" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;In the iterative solution, the intuition is to itertively take the head off the original linked list and make it the head of another linked list using the insert function for linked&amp;nbsp;lists. &lt;/p&gt;
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+2
+3
+4&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;insert&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;linked_list&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;node_val&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;ListNode&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;vanode_vall&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;next&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;linked_list&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;Here&amp;#8217;s a worked example that lends some intuition to the process, starting with a normal linked&amp;nbsp;list.&lt;/p&gt;
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+2
+3&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;1 -&amp;gt; 2 -&amp;gt; 3 -&amp;gt; 4 -&amp;gt; 5 -&amp;gt; None &lt;/span&gt;
+&lt;span class="err"&gt;|&lt;/span&gt;
+&lt;span class="err"&gt;head&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;We then increment &lt;code&gt;head&lt;/code&gt; and use &lt;code&gt;ptr&lt;/code&gt; to make the head of the original linked list the head of a new linked&amp;nbsp;list.&lt;/p&gt;
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+2
+3
+4
+5
+6
+7
+8&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="m"&gt;1&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="m"&gt;2&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="m"&gt;3&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="m"&gt;4&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="m"&gt;5&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;None&lt;/span&gt; 
+&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="o"&gt;|&lt;/span&gt;
+&lt;span class="n"&gt;ptr&lt;/span&gt;  &lt;span class="n"&gt;head&lt;/span&gt;
+
+
+&lt;span class="n"&gt;None&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;    &lt;span class="m"&gt;2&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="m"&gt;3&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="m"&gt;4&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="m"&gt;5&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;None&lt;/span&gt; 
+       &lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="o"&gt;|&lt;/span&gt;
+      &lt;span class="n"&gt;ptr&lt;/span&gt;  &lt;span class="n"&gt;head&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;And so on, with the remaning&amp;nbsp;nodes&lt;/p&gt;
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;None&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="m"&gt;2&lt;/span&gt;     &lt;span class="m"&gt;3&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="m"&gt;4&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="m"&gt;5&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;None&lt;/span&gt; 
+            &lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="o"&gt;|&lt;/span&gt;
+           &lt;span class="n"&gt;ptr&lt;/span&gt;  &lt;span class="n"&gt;head&lt;/span&gt;
+
+&lt;span class="n"&gt;None&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="m"&gt;2&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="m"&gt;3&lt;/span&gt;    &lt;span class="m"&gt;4&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="m"&gt;5&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;None&lt;/span&gt; 
+                 &lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="o"&gt;|&lt;/span&gt;
+                &lt;span class="n"&gt;ptr&lt;/span&gt;  &lt;span class="n"&gt;head&lt;/span&gt;
+
+
+&lt;span class="n"&gt;None&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="m"&gt;2&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="m"&gt;3&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt;  &lt;span class="m"&gt;4&lt;/span&gt;    &lt;span class="m"&gt;5&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;None&lt;/span&gt; 
+                       &lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="o"&gt;|&lt;/span&gt;
+                      &lt;span class="n"&gt;ptr&lt;/span&gt;  &lt;span class="n"&gt;head&lt;/span&gt;
+
+
+&lt;span class="n"&gt;None&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="m"&gt;2&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="m"&gt;3&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt;  &lt;span class="m"&gt;4&lt;/span&gt;  &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="m"&gt;5&lt;/span&gt;   &lt;span class="n"&gt;None&lt;/span&gt; 
+                            &lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="o"&gt;|&lt;/span&gt;
+                           &lt;span class="n"&gt;ptr&lt;/span&gt;  &lt;span class="n"&gt;head&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;Then return &lt;code&gt;ptr&lt;/code&gt; and you get your reversed linked&amp;nbsp;list.&lt;/p&gt;
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Solution&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;reverseList&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;head&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;ListNode&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;ListNode&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="ow"&gt;not&lt;/span&gt; &lt;span class="n"&gt;head&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="k"&gt;return&lt;/span&gt;
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="ow"&gt;not&lt;/span&gt; &lt;span class="n"&gt;head&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;next&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;head&lt;/span&gt;
+
+        &lt;span class="n"&gt;prev_ptr&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kc"&gt;None&lt;/span&gt;
+
+        &lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="n"&gt;head&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+
+            &lt;span class="n"&gt;ptr&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;head&lt;/span&gt;
+            &lt;span class="n"&gt;head&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;head&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;next&lt;/span&gt;
+
+            &lt;span class="n"&gt;ptr&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;next&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;prev_ptr&lt;/span&gt;
+            &lt;span class="n"&gt;prev_ptr&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;ptr&lt;/span&gt;
+
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;ptr&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</content><category term="David"></category><category term="Week 1"></category><category term="LeetCode"></category></entry><entry><title>237 Delete Node in a Linked List (David)</title><link href="/blog/2020/05/11/237-delete-node-in-a-linked-list-david/" rel="alternate"></link><published>2020-05-11T23:30:00-04:00</published><updated>2020-05-11T23:30:00-04:00</updated><author><name>David Hadaller</name></author><id>tag:None,2020-05-11:/blog/2020/05/11/237-delete-node-in-a-linked-list-david/</id><summary type="html">&lt;p&gt;Usually, when deleting nodes in a linked list, we start with the head, and search for the node to delete. Once found, we usually delete the node with some pointer manipulation according to the &lt;a href="https://github.com/codepath/compsci_guides/wiki/Dummy-Head"&gt;dummy head technique&lt;/a&gt;. &lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;However&lt;/strong&gt;, the  &lt;a href="https://leetcode.com/problems/delete-node-in-a-linked-list/"&gt;Delete Node in a Linked List&lt;/a&gt;  problem is slightly different; it …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Usually, when deleting nodes in a linked list, we start with the head, and search for the node to delete. Once found, we usually delete the node with some pointer manipulation according to the &lt;a href="https://github.com/codepath/compsci_guides/wiki/Dummy-Head"&gt;dummy head technique&lt;/a&gt;. &lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;However&lt;/strong&gt;, the  &lt;a href="https://leetcode.com/problems/delete-node-in-a-linked-list/"&gt;Delete Node in a Linked List&lt;/a&gt;  problem is slightly different; it instructs us to start in the middle of the linked list with  &lt;code&gt;node&lt;/code&gt; , and delete that element. We don&amp;#8217;t start at the head of the list or use the dummy head technique, as is normally the case. To delete &lt;code&gt;node&lt;/code&gt; starting from &lt;code&gt;node&lt;/code&gt; itself, we use the strategy of overwriting the value of &lt;code&gt;node&lt;/code&gt; and shifting each of the values of the remaining to the right. Here&amp;#8217;s a worked example for deleting the node with value &lt;code&gt;2&lt;/code&gt; in linked list &lt;code&gt;1 -&amp;gt; 2 -&amp;gt; 3 -&amp;gt; 4 -&amp;gt; 5-&amp;gt; None&lt;/code&gt;. &lt;/p&gt;
+&lt;p&gt;This is the linked list we start&amp;nbsp;with&lt;/p&gt;
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+2
+3
+4&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;1 -&amp;gt; 2 -&amp;gt; 3 -&amp;gt; 4 -&amp;gt; 5-&amp;gt; None&lt;/span&gt;
+&lt;span class="err"&gt;     |&lt;/span&gt;
+&lt;span class="err"&gt;    ptr&lt;/span&gt;
+&lt;span class="err"&gt;   (node)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;We then proceed thrugh the while loop, overwriting &lt;code&gt;ptr.val&lt;/code&gt; with &lt;code&gt;ptr.next.val&lt;/code&gt;. Here we overwrote &lt;code&gt;2&lt;/code&gt; with &lt;code&gt;3&lt;/code&gt;.&lt;/p&gt;
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+2
+3&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;1 -&amp;gt; 3 -&amp;gt; 3 -&amp;gt; 4 -&amp;gt; 5-&amp;gt; None&lt;/span&gt;
+&lt;span class="err"&gt;     |    |&lt;/span&gt;
+&lt;span class="err"&gt;    ptr   ptr.next&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;Now, we overwrite &lt;code&gt;3&lt;/code&gt; with &lt;code&gt;4&lt;/code&gt;.&lt;/p&gt;
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+2
+3&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;1 -&amp;gt; 3 -&amp;gt; 4 -&amp;gt; 4 -&amp;gt; 5-&amp;gt; None&lt;/span&gt;
+&lt;span class="err"&gt;           |    |&lt;/span&gt;
+&lt;span class="err"&gt;          ptr   ptr.next&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;After that, we exit the while loop, because we&amp;#8217;re close enough to the tail of the list to put the final elements in place; shift the final element of the link list over to the left by overwriting &lt;code&gt;4&lt;/code&gt; with &lt;code&gt;5&lt;/code&gt;, then overwrite the last &lt;code&gt;5&lt;/code&gt; with &lt;code&gt;None&lt;/code&gt;.&lt;/p&gt;
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+2
+3
+4
+5
+6
+7
+8&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="mi"&gt;4&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="mi"&gt;5&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="k"&gt;None&lt;/span&gt;
+               &lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="o"&gt;|&lt;/span&gt;
+              &lt;span class="n"&gt;ptr&lt;/span&gt;   &lt;span class="n"&gt;ptr&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="k"&gt;next&lt;/span&gt;
+
+
+&lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="mi"&gt;4&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="mi"&gt;5&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="k"&gt;None&lt;/span&gt;
+               &lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="o"&gt;|&lt;/span&gt;
+              &lt;span class="n"&gt;ptr&lt;/span&gt;   &lt;span class="n"&gt;ptr&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="k"&gt;next&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;Finally, the&amp;nbsp;code: &lt;/p&gt;
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c1"&gt;# 237. Delete Node in a Linked List&lt;/span&gt;
+
+&lt;span class="c1"&gt;# Definition for singly-linked list.&lt;/span&gt;
+&lt;span class="c1"&gt;# class ListNode:&lt;/span&gt;
+&lt;span class="c1"&gt;#     def __init__(self, x):&lt;/span&gt;
+&lt;span class="c1"&gt;#         self.val = x&lt;/span&gt;
+&lt;span class="c1"&gt;#         self.next = None&lt;/span&gt;
+
+&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Solution&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;deleteNode&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;node&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="sd"&gt;&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+&lt;span class="sd"&gt;        :type node: ListNode&lt;/span&gt;
+&lt;span class="sd"&gt;        :rtype: void Do not return anything, modify node in-place instead.&lt;/span&gt;
+&lt;span class="sd"&gt;        &amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+        &lt;span class="n"&gt;ptr&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;node&lt;/span&gt;
+
+        &lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="n"&gt;ptr&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;next&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;next&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="n"&gt;ptr&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;val&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;ptr&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;next&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;val&lt;/span&gt;
+            &lt;span class="n"&gt;ptr&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;ptr&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;next&lt;/span&gt;
+
+        &lt;span class="n"&gt;ptr&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;val&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;ptr&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;next&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;val&lt;/span&gt;
+        &lt;span class="n"&gt;ptr&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;next&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kc"&gt;None&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</content><category term="David"></category><category term="Week 1"></category><category term="LeetCode"></category></entry><entry><title>Add Two Numbers</title><link href="/blog/2020/05/10/add-two-numbers/" rel="alternate"></link><published>2020-05-10T22:30:00-04:00</published><updated>2020-05-10T22:30:00-04:00</updated><author><name>Alex Matson</name></author><id>tag:None,2020-05-10:/blog/2020/05/10/add-two-numbers/</id><summary type="html">&lt;p&gt;This post will cover my solution in Python 3 for LeetCode&amp;#8217;s &lt;a href="https://leetcode.com/problems/add-two-numbers/"&gt;Add Two Numbers&lt;/a&gt; problem. The problem wants us to add two numbers (&lt;code&gt;l1&lt;/code&gt; and &lt;code&gt;l2&lt;/code&gt; that are encoded as linked lists, such that each digit is a linked list node. In this scheme, the digits in the linked …&lt;/p&gt;</summary><content type="html">&lt;p&gt;This post will cover my solution in Python 3 for LeetCode&amp;#8217;s &lt;a href="https://leetcode.com/problems/add-two-numbers/"&gt;Add Two Numbers&lt;/a&gt; problem. The problem wants us to add two numbers (&lt;code&gt;l1&lt;/code&gt; and &lt;code&gt;l2&lt;/code&gt; that are encoded as linked lists, such that each digit is a linked list node. In this scheme, the digits in the linked list are ordered from least significant to most signficant. Thus, the number &lt;code&gt;254&lt;/code&gt; would be represented as the linked list &lt;code&gt;4 -&amp;gt; 5 -&amp;gt; 2 -&amp;gt; None&lt;/code&gt;. &lt;/p&gt;
+&lt;p&gt;The general approach to the problem that I took was to loop through the lists, pairwise add the digits of &lt;code&gt;l1&lt;/code&gt; and &lt;code&gt;l2&lt;/code&gt; and insert them as new nodes into a return list. I&amp;#8217;ll walk through my solution with some annotated code&amp;nbsp;snippets. &lt;/p&gt;
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c1"&gt;# Definition for singly-linked list.&lt;/span&gt;
+&lt;span class="c1"&gt;# class ListNode:&lt;/span&gt;
+&lt;span class="c1"&gt;#     def __init__(self, x):&lt;/span&gt;
+&lt;span class="c1"&gt;#         self.val = x&lt;/span&gt;
+&lt;span class="c1"&gt;#         self.next = None&lt;/span&gt;
+
+&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="n"&gt;Solution:&lt;/span&gt;
+    &lt;span class="n"&gt;def&lt;/span&gt; &lt;span class="n"&gt;addTwoNumbers&lt;/span&gt;(&lt;span class="nb"&gt;self&lt;/span&gt;, &lt;span class="n"&gt;l1:&lt;/span&gt; &lt;span class="n"&gt;ListNode&lt;/span&gt;, &lt;span class="n"&gt;l2:&lt;/span&gt; &lt;span class="n"&gt;ListNode&lt;/span&gt;) -&amp;gt; &lt;span class="n"&gt;ListNode:&lt;/span&gt;
+    &lt;span class="c1"&gt;# Use dummy head technique as a starting point for the algorithm&lt;/span&gt;
+    &lt;span class="nb"&gt;head&lt;/span&gt; = &lt;span class="n"&gt;ListNode&lt;/span&gt;(&lt;span class="s"&gt;&amp;quot;dummy&amp;quot;&lt;/span&gt;)
+    &lt;span class="n"&gt;current&lt;/span&gt; = &lt;span class="nb"&gt;head&lt;/span&gt;
+
+    &lt;span class="c1"&gt;# Iterate through the lists until _both_ are None&lt;/span&gt;
+    &lt;span class="c1"&gt;# This means, even if one is shorter than the other, keep looping anyway&lt;/span&gt;
+    &lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="n"&gt;l1&lt;/span&gt; &lt;span class="o"&gt;or&lt;/span&gt; &lt;span class="n"&gt;l2:&lt;/span&gt;
+        &lt;span class="c1"&gt;# Default to &amp;quot;0&amp;quot; if one of the lists is out of digits&lt;/span&gt;
+        &lt;span class="n"&gt;val1&lt;/span&gt; = &lt;span class="n"&gt;l1&lt;/span&gt;.&lt;span class="nb"&gt;val&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;l1&lt;/span&gt; &lt;span class="k"&gt;else&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;
+        &lt;span class="n"&gt;val2&lt;/span&gt; = &lt;span class="n"&gt;l2&lt;/span&gt;.&lt;span class="nb"&gt;val&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;l2&lt;/span&gt; &lt;span class="k"&gt;else&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;
+
+        &lt;span class="c1"&gt;# Compute the sum of the two digits for the result digit&lt;/span&gt;
+        &lt;span class="n"&gt;digit&lt;/span&gt; = &lt;span class="n"&gt;val1&lt;/span&gt; + &lt;span class="n"&gt;val2&lt;/span&gt;
+
+        &lt;span class="c1"&gt;# Move a carry by adding 1 to the next node in l1 or l2 -- depending on which one actually has a &amp;quot;next&amp;quot; node available&lt;/span&gt;
+        &lt;span class="c1"&gt;# If neither l1 or l2 have a next node available, (for example, you are carrying past the final digit of the longer l1/l2)&lt;/span&gt;
+        &lt;span class="c1"&gt;# then just create a new node and append it to the end&lt;/span&gt;
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;digit&lt;/span&gt; &amp;gt;= &lt;span class="mi"&gt;10&lt;/span&gt;:
+        &lt;span class="n"&gt;node&lt;/span&gt; = &lt;span class="n"&gt;l1&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;l1&lt;/span&gt; &lt;span class="k"&gt;else&lt;/span&gt; &lt;span class="n"&gt;l2&lt;/span&gt;
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;node&lt;/span&gt;.&lt;span class="n"&gt;next:&lt;/span&gt;
+            &lt;span class="n"&gt;node&lt;/span&gt;.&lt;span class="nb"&gt;next&lt;/span&gt;.&lt;span class="nb"&gt;val&lt;/span&gt; += &lt;span class="mi"&gt;1&lt;/span&gt;
+        &lt;span class="n"&gt;else:&lt;/span&gt;
+            &lt;span class="n"&gt;node&lt;/span&gt;.&lt;span class="nb"&gt;next&lt;/span&gt; = &lt;span class="n"&gt;ListNode&lt;/span&gt;(&lt;span class="mi"&gt;1&lt;/span&gt;)
+
+        &lt;span class="n"&gt;temp&lt;/span&gt; = &lt;span class="n"&gt;ListNode&lt;/span&gt;(&lt;span class="n"&gt;digit&lt;/span&gt; % &lt;span class="mi"&gt;10&lt;/span&gt;)
+
+        &lt;span class="c1"&gt;# Put this digit as a node into our result list&lt;/span&gt;
+        &lt;span class="c1"&gt;# Move the result list forward&lt;/span&gt;
+        &lt;span class="n"&gt;current&lt;/span&gt;.&lt;span class="nb"&gt;next&lt;/span&gt; = &lt;span class="n"&gt;temp&lt;/span&gt;
+        &lt;span class="n"&gt;current&lt;/span&gt; = &lt;span class="n"&gt;current&lt;/span&gt;.&lt;span class="nb"&gt;next&lt;/span&gt;
+
+        &lt;span class="c1"&gt;# Move l1 and l2 forward, for as long as they have a &amp;quot;next&amp;quot;&lt;/span&gt;
+        &lt;span class="n"&gt;l1&lt;/span&gt; = &lt;span class="n"&gt;l1&lt;/span&gt;.&lt;span class="nb"&gt;next&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;l1&lt;/span&gt; &lt;span class="k"&gt;else&lt;/span&gt; &lt;span class="n"&gt;None&lt;/span&gt;
+        &lt;span class="n"&gt;l2&lt;/span&gt; = &lt;span class="n"&gt;l2&lt;/span&gt;.&lt;span class="nb"&gt;next&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;l2&lt;/span&gt; &lt;span class="k"&gt;else&lt;/span&gt; &lt;span class="n"&gt;None&lt;/span&gt;
+
+    &lt;span class="c1"&gt;# Return the next to exclude our dummy head from the beginning&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="nb"&gt;head&lt;/span&gt;.&lt;span class="nb"&gt;next&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</content><category term="Alex"></category><category term="LeetCode"></category><category term="Week 1"></category></entry><entry><title>Week 1 Excercises</title><link href="/blog/2020/05/09/week-1-excercises/" rel="alternate"></link><published>2020-05-09T11:15:00-04:00</published><updated>2020-05-09T11:15:00-04:00</updated><author><name>David Hadaller</name></author><id>tag:None,2020-05-09:/blog/2020/05/09/week-1-excercises/</id><summary type="html">&lt;h3 id="goals"&gt;Goals&lt;a class="headerlink" href="#goals" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;This week we will be covering the fundamentals of &lt;em&gt;linked lists&lt;/em&gt; and common ways they appear in&amp;nbsp;interviews.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Easily build a linked&amp;nbsp;list&lt;/li&gt;
+&lt;li&gt;Understand most common&amp;nbsp;variants&lt;/li&gt;
+&lt;li&gt;Feel comfortable with&amp;nbsp;recursion&lt;/li&gt;
+&lt;li&gt;Two pointer&amp;nbsp;technique&lt;/li&gt;
+&lt;li&gt;Dummy head&amp;nbsp;technique&lt;/li&gt;
+&lt;li&gt;Comfort with pointer&amp;nbsp;bookkeeping&lt;/li&gt;
+&lt;li&gt;Framework for approaching Linked List&amp;nbsp;problems&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="monday"&gt;Monday&lt;a class="headerlink" href="#monday" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;Read …&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;h3 id="goals"&gt;Goals&lt;a class="headerlink" href="#goals" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;This week we will be covering the fundamentals of &lt;em&gt;linked lists&lt;/em&gt; and common ways they appear in&amp;nbsp;interviews.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Easily build a linked&amp;nbsp;list&lt;/li&gt;
+&lt;li&gt;Understand most common&amp;nbsp;variants&lt;/li&gt;
+&lt;li&gt;Feel comfortable with&amp;nbsp;recursion&lt;/li&gt;
+&lt;li&gt;Two pointer&amp;nbsp;technique&lt;/li&gt;
+&lt;li&gt;Dummy head&amp;nbsp;technique&lt;/li&gt;
+&lt;li&gt;Comfort with pointer&amp;nbsp;bookkeeping&lt;/li&gt;
+&lt;li&gt;Framework for approaching Linked List&amp;nbsp;problems&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="monday"&gt;Monday&lt;a class="headerlink" href="#monday" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;Read the &lt;a href="https://github.com/codepath/compsci_guides/wiki/Linked-Lists"&gt;Linked List Codepath Wiki&amp;nbsp;Article&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Read about the &lt;a href="https://github.com/codepath/compsci_guides/wiki/Dummy-Head"&gt;Dummy Head&lt;/a&gt;, &lt;a href="https://github.com/codepath/compsci_guides/wiki/Multiple-Pass"&gt;Multiple Pass&lt;/a&gt;, and &lt;a href="https://github.com/codepath/compsci_guides/wiki/Linked-List-Two-Pointer"&gt;Two-Pointer&lt;/a&gt; linked list design&amp;nbsp;patterns.&lt;/li&gt;
+&lt;li&gt;Solve the following problems (shoot for 30-90 minutes in total)&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://leetcode.com/problems/delete-node-in-a-linked-list/"&gt;Delete Node in a Linked List -&amp;nbsp;LeetCode&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://leetcode.com/problems/reverse-linked-list/"&gt;Reverse Linked List -&amp;nbsp;LeetCode&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://leetcode.com/problems/linked-list-cycle/"&gt;Linked List Cycle -&amp;nbsp;LeetCode&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://leetcode.com/problems/add-two-numbers/"&gt;Add Two Numbers -&amp;nbsp;LeetCode&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id="wednesday"&gt;Wednesday&lt;a class="headerlink" href="#wednesday" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;Read the &lt;span class="caps"&gt;UMPIRE&lt;/span&gt; method post &lt;a href="/umpire/"&gt;here&lt;/a&gt; and follow the steps (Understand, Match, Prototype, Implement, Review, and Evaluate) as you solve the problems. Take special care to match based on the linked list designed patterns learned on Monday, and to sketch visualizations / write pseudo code on a notepad near your computer. Pointer Bookeeping (demonstrated in &lt;a href="https://www.youtube.com/watch?list=PLrT2tZ9JRrf65ueO-CGGT_Y8pfZfHv0vR&amp;amp;v=RH9-7SPVZw4"&gt;this lecture&lt;/a&gt;) can be a helpful tool for linked list diagramming. Also, for a refresher on how pointers work in python read this article on &lt;a href="http://foobarnbaz.com/2012/07/08/understanding-python-variables/"&gt;python variables and memory management&lt;/a&gt; and/or this passage about &lt;a href="https://realpython.com/pointers-in-python/#simulating-pointers-in-python"&gt;simulating pointers in python&lt;/a&gt;.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://leetcode.com/problems/odd-even-linked-list/"&gt;Odd Even Linked List -&amp;nbsp;LeetCode&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://leetcode.com/problems/swap-nodes-in-pairs/"&gt;Swap Nodes in Pairs -&amp;nbsp;LeetCode&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://leetcode.com/problems/rotate-list/description/"&gt;Rotate List -&amp;nbsp;LeetCode&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://leetcode.com/problems/partition-list/"&gt;Partition List -&amp;nbsp;LeetCode&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://leetcode.com/problems/add-two-numbers-ii/"&gt;Add Two Numbers &lt;span class="caps"&gt;II&lt;/span&gt; -&amp;nbsp;LeetCode&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="saturday"&gt;Saturday&lt;a class="headerlink" href="#saturday" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://leetcode.com/problems/merge-two-sorted-lists/"&gt;Merge Two Sorted Lists -&amp;nbsp;LeetCode&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://leetcode.com/problems/intersection-of-two-linked-lists/"&gt;Intersection of Two Linked Lists -&amp;nbsp;LeetCode&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://leetcode.com/problems/copy-list-with-random-pointer/"&gt;Copy List with Random Pointer -&amp;nbsp;LeetCode&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://leetcode.com/problems/linked-list-cycle-ii/"&gt;Linked List Cycle &lt;span class="caps"&gt;II&lt;/span&gt; -&amp;nbsp;LeetCode&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://leetcode.com/problems/remove-duplicates-from-sorted-list-ii/"&gt;Remove Duplicates from Sorted List &lt;span class="caps"&gt;II&lt;/span&gt; -&amp;nbsp;LeetCode&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://leetcode.com/problems/reorder-list/"&gt;Reorder List -&amp;nbsp;LeetCode&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://leetcode.com/problems/merge-k-sorted-lists/"&gt;Merge k Sorted Lists -&amp;nbsp;LeetCode&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content><category term="Weekly Lessons"></category><category term="Week 1"></category><category term="Excercises"></category><category term="LeetCode"></category></entry></feed>

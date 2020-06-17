@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="/theme/css/style.min.css?fc5adb95">
+
+        <link rel="dns-prefetch" href="//fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+
+        <meta name="google-site-verification" content="Bk4Z5ucHLyPXqlZlj5LzANpYBBSvxqBW4E8i-Kwf-bQ" />        <meta name="msvalidate.01" content="8FF1B025212A47B5B27CC47163A042F0" />        <meta name="author" content="David Hadaller" />
+
+        <meta property="og:type" content="article" />
+        <meta name="twitter:card" content="summary">
+
+<meta name="keywords" content="Python, Data Structures, David, " />
+
+<meta property="og:title" content="Stacks, Queues, Heaps, and Hash Tables in Python "/>
+<meta property="og:url" content="/blog/2020/05/10/stacks-queues-heaps-and-hash-tables-in-python/" />
+<meta property="og:description" content="Many interview problems that rely on stacks, queues, and hash tables, could be made easier by importing some python libraries that I rarely use. Most of these are in sections 8.3: collections, and 8.4 : heapq, in the Python documentation. Stacks (docs)¶ First, just for reference, here is the …" />
+<meta property="og:site_name" content="CCNY_Prep" />
+<meta property="og:article:author" content="David Hadaller" />
+<meta property="og:article:published_time" content="2020-05-10T13:09:00-04:00" />
+<meta name="twitter:title" content="Stacks, Queues, Heaps, and Hash Tables in Python ">
+<meta name="twitter:description" content="Many interview problems that rely on stacks, queues, and hash tables, could be made easier by importing some python libraries that I rarely use. Most of these are in sections 8.3: collections, and 8.4 : heapq, in the Python documentation. Stacks (docs)¶ First, just for reference, here is the …">
+
+        <title>Stacks, Queues, Heaps, and Hash Tables in Python  · CCNY_Prep
+</title>
+        <link href="/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="CCNY_Prep - Full Atom Feed" />
+        <link href="/feeds/all.rss" type="application/rss+xml" rel="alternate" title="CCNY_Prep - Full RSS Feed" />
+
+
+
+    </head>
+    <body>
+        <div id="content">
+            <div class="navbar navbar-static-top">
+                <div class="navbar-inner">
+                    <div class="container-fluid">
+                        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </a>
+                        <a class="brand" href="/"><span class=site-name>CCNY_Prep</span></a>
+                        <div class="nav-collapse collapse">
+                            <ul class="nav pull-right top-menu">
+                                <li >
+                                    <a href=
+                                       "/"
+                                    >Home</a>
+                                </li>
+                                <li ><a href="/about/">About</a></li>
+                                <li ><a href="/umpire/"><span class="caps">UMPIRE</span></a></li>
+                                <li ><a href="/categories">Categories</a></li>
+                                <li ><a href="/tags">Tags</a></li>
+                                <li ><a href="/archives">Archives</a></li>
+                                <li><form class="navbar-search" action="/search.html" onsubmit="return validateForm(this.elements['q'].value);"> <input type="text" class="search-query" placeholder="Search" name="q" id="tipue_search_input"></form></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid">
+                <div class="row-fluid">
+                    <div class="span1"></div>
+                    <div class="span10">
+<article itemscope>
+<div class="row-fluid">
+    <header class="page-header span10 offset2">
+        <h1>
+            <a href="/blog/2020/05/10/stacks-queues-heaps-and-hash-tables-in-python/">
+                Stacks, Queues, Heaps, and Hash Tables in&nbsp;Python
+            </a>
+        </h1>
+    </header>
+</div>
+
+<div class="row-fluid">
+        <div class="span8 offset2 article-content">
+            
+            <p>Many interview problems that rely on stacks, queues, and hash tables, could be made easier by importing some python libraries that I rarely use. Most of these are in sections <a href="https://docs.python.org/3.8/library/collections.html">8.3: collections</a>, and <a href="https://docs.python.org/3.8/library/heapq.html?highlight=heapq#module-heapq">8.4 : heapq</a>,  in the Python&nbsp;documentation. </p>
+<h3 id="stacks-docs">Stacks (<a href="https://docs.python.org/3/tutorial/datastructures.html#using-lists-as-stacks">docs</a>)<a class="headerlink" href="#stacks-docs" title="Permanent link">&para;</a></h3>
+<p>First, just for reference, here is the way to implement a python stack using a&nbsp;list:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">stack</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span> <span class="c1"># a list named &quot;stack&quot;</span>
+<span class="n">stack</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span> <span class="c1"># just use regular list append to add something to the stack</span>
+<span class="n">stack</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span> <span class="c1"># removes the last element of our list named stack</span>
+</code></pre></div>
+</td></tr></table>
+
+<p>Pretty simple. Just remember that, while <code>pop()</code> is a list method in python, <code>push()</code> isn&#8217;t.</p>
+<h3 id="priority-queue-or-heap-docs">Priority Queue or  Heap (<a href="https://docs.python.org/2/library/heapq.html">docs</a>)<a class="headerlink" href="#priority-queue-or-heap-docs" title="Permanent link">&para;</a></h3>
+<p>There isn&#8217;t a purpose-built heap class in python. Like stacks, python heaps are implemented using a list. However, the methods for pushing, and popping and reheapifying aren&#8217;t standard list methods, so they have to be&nbsp;imported.</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">heapq</span>
+<span class="n">heap</span> <span class="o">=</span> <span class="p">[</span><span class="mi">21</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">45</span><span class="p">,</span><span class="mi">78</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">]</span> <span class="c1"># a python list named &quot;heap&quot;</span>
+<span class="n">heapq</span><span class="o">.</span><span class="n">heapify</span><span class="p">(</span><span class="n">heap</span><span class="p">)</span> <span class="c1"># run heapify on our list named heap</span>
+<span class="n">heapq</span><span class="o">.</span><span class="n">heappop</span><span class="p">(</span><span class="n">heap</span><span class="p">)</span> <span class="c1"># heappop pops one element off and reheapifies the list</span>
+<span class="n">heapq</span><span class="o">.</span><span class="n">heappush</span><span class="p">(</span><span class="n">heap</span><span class="p">,</span><span class="mi">8</span><span class="p">)</span> <span class="c1"># heappush appends 8 and reheapifies the list </span>
+</code></pre></div>
+</td></tr></table>
+
+<h3 id="queues-docs">Queues (<a href="https://docs.python.org/2/library/collections.html#deque-objects">docs</a>)<a class="headerlink" href="#queues-docs" title="Permanent link">&para;</a></h3>
+<p>The queue must have it&#8217;s own class, because removing items from the front of a python list takes O(n) time. Each and every list element has to be moved once to the left, should the first list element be removed. I&#8217;m not certain as to why this is, since I had always thought that the underlying implementation of a python list was a linked list with indexed, random access pointers to each list element. At any rate, the <code>deque</code> class, which implements the queue data structure in python, has enqueue and dequeue operations that are both&nbsp;O(1).</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">collections.deque</span>
+<span class="n">queue</span> <span class="o">=</span> <span class="n">deque</span><span class="p">([</span><span class="s2">&quot;Mon&quot;</span><span class="p">,</span><span class="s2">&quot;Tue&quot;</span><span class="p">,</span><span class="s2">&quot;Wed&quot;</span><span class="p">])</span> <span class="c1"># create deque named &quot;queue&quot; from list</span>
+
+<span class="c1"># enter on right, leave on left</span>
+<span class="n">queue</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;Thu&quot;</span><span class="p">)</span> <span class="c1"># Append to the right</span>
+<span class="n">queue</span><span class="o">.</span><span class="n">popleft</span><span class="p">()</span> <span class="c1"># Remove from the left (removes Mon)</span>
+
+<span class="c1"># enter on left, leave on right</span>
+<span class="n">queue</span><span class="o">.</span><span class="n">appendleft</span><span class="p">(</span><span class="s2">&quot;Sun&quot;</span><span class="p">)</span> <span class="c1"># append to the left</span>
+<span class="n">queue</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span> <span class="c1"># Remove from the right</span>
+</code></pre></div>
+</td></tr></table>
+
+<p>The <code>deque</code> class implements a two sided queue. You enter from the left or the right. Consequentially, you can also implement a stack from the <code>deque</code> class.</p>
+<h3 id="dictionary-or-hashtable">Dictionary or Hashtable<a class="headerlink" href="#dictionary-or-hashtable" title="Permanent link">&para;</a></h3>
+<h4 id="the-dictionary">The Dictionary<a class="headerlink" href="#the-dictionary" title="Permanent link">&para;</a></h4>
+<p>Suppose you have a string <code>s</code>. You can keep a tally of the number of letters of each kind in the word with a Python&nbsp;dictionary. </p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">s</span> <span class="o">=</span> <span class="s2">&quot;letters&quot;</span>
+<span class="n">d</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">char</span> <span class="ow">in</span> <span class="n">s</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">char</span> <span class="ow">in</span> <span class="n">d</span><span class="p">:</span> <span class="c1">#check if the character exists in the dictionary</span>
+        <span class="n">d</span><span class="p">[</span><span class="n">char</span><span class="p">]</span><span class="o">+=</span><span class="mi">1</span> <span class="c1">#if it does, increment</span>
+    <span class="k">else</span><span class="p">:</span> 
+        <span class="n">d</span><span class="p">[</span><span class="n">char</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span> <span class="c1">#if not, initialize to 1</span>
+</code></pre></div>
+</td></tr></table>
+
+<h4 id="counter-objects-docs">Counter Objects (<a href="https://docs.python.org/2/library/collections.html#counter-objects">docs</a>)<a class="headerlink" href="#counter-objects-docs" title="Permanent link">&para;</a></h4>
+<p>Counters are a subclass of dictionaries, designed to keep tallies. You can pass any iterable and each element in the iterable (letters in a string, elements in a list, items in a dictionary.)  Basically a Counter is a dictionary,&nbsp;but </p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="c1"># normal dictionary</span>
+<span class="n">d</span> <span class="o">=</span> <span class="p">{}</span> 
+<span class="n">d</span><span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">]</span> <span class="c1"># returns KeyError: &#39;a&#39;</span>
+
+<span class="c1"># counter dictionary </span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">Counter</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">()</span>
+<span class="n">c</span><span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">]</span> <span class="c1"># initializes a dictionary element with default value of {&#39;a&#39;: 0} AND returns 0</span>
+</code></pre></div>
+</td></tr></table>
+
+<p>Here is how you would take a tally using <code>Counter</code>.</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="c1"># Tally occurrences of words in a list</span>
+<span class="n">cnt</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">([</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="s1">&#39;blue&#39;</span><span class="p">])</span>
+<span class="n">cnt</span><span class="o">.</span><span class="n">most_common</span><span class="p">()</span> <span class="c1"># returns list of tuples with count [(&#39;blue&#39;, 3), (&#39;red&#39;, 2), (&#39;green&#39;, 1)]</span>
+</code></pre></div>
+</td></tr></table>
+
+<h4 id="default-dictionary-docs">Default Dictionary (<a href="https://docs.python.org/2/library/collections.html#defaultdict-objects">docs</a>)<a class="headerlink" href="#default-dictionary-docs" title="Permanent link">&para;</a></h4>
+<p>Like the <code>Counter</code> objects, <code>defaultdict</code> objects do not return key errors. Default dictionaries allow you to pass a lambda function as an argument that will be run whenever a value can&#8217;t be found for a given&nbsp;key.</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">dd</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="p">{})</span> <span class="c1"># this default dict creates key:None in dictionary whenever key doesn&#39;t already exist</span>
+<span class="n">dd</span><span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">]</span> <span class="c1"># returns None instead of KeyError</span>
+</code></pre></div>
+</td></tr></table>
+
+
+             
+ 
+                <p id="post-share-links">
+    Like this post? Share on:
+      <a href="https://twitter.com/intent/tweet?text=Stacks%2C%20Queues%2C%20Heaps%2C%20and%20Hash%20Tables%20in%C2%A0Python&url=/blog/2020/05/10/stacks-queues-heaps-and-hash-tables-in-python/&hashtags=python,data-structures" target="_blank" rel="nofollow noopener noreferrer" title="Share on Twitter">Twitter</a>
+ ❄       <a href="https://www.facebook.com/sharer/sharer.php?u=/blog/2020/05/10/stacks-queues-heaps-and-hash-tables-in-python/" target="_blank" rel="nofollow noopener noreferrer" title="Share on Facebook">Facebook</a>
+ ❄       <a href="mailto:?subject=Stacks%2C%20Queues%2C%20Heaps%2C%20and%20Hash%20Tables%20in%C2%A0Python&amp;body=/blog/2020/05/10/stacks-queues-heaps-and-hash-tables-in-python/" target="_blank" rel="nofollow noopener noreferrer" title="Share via Email">Email</a>
+
+            
+            
+
+
+
+
+
+
+
+            <hr/>
+            <aside>
+            <nav>
+            <ul class="articles-timeline">
+                <li class="previous-article">« <a href="/blog/2020/05/10/242-valid-anagram-david/" title="Previous: 242 Valid Anagram (David)">242 Valid Anagram (David)</a></li>
+                <li class="next-article"><a href="/blog/2020/05/10/add-two-numbers/" title="Next: Add Two Numbers">Add Two Numbers</a> »</li>
+            </ul>
+            </nav>
+            </aside>
+        </div>
+        <section id="article-sidebar" class="span2">
+            <h4>Published</h4>
+            <time itemprop="dateCreated" datetime="2020-05-10T13:09:00-04:00">Sun 10 May 2020</time>
+            <h4>Category</h4>
+            <a class="category-link" href="/categories#david-ref">David</a>
+            <h4>Tags</h4>
+            <ul class="list-of-tags tags-in-article">
+                <li><a href="/tags#data-structures-ref">Data Structures
+                    <span class="superscript">1</span>
+</a></li>
+                <li><a href="/tags#python-ref">Python
+                    <span class="superscript">1</span>
+</a></li>
+            </ul>
+            
+
+
+
+
+
+            
+
+
+
+
+
+        </section>
+</div>
+</article>
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe.
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides.
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo https://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>                    </div>
+                    <div class="span1"></div>
+                </div>
+            </div>
+        </div>
+<footer>
+
+    <div>
+        <span class="site-name">CCNY_Prep</span> - This is where I do test things
+    </div>
+
+
+
+    <div id="fpowered">
+        Powered by: <a href="http://getpelican.com/" title="Pelican Home Page" target="_blank" rel="nofollow noopener noreferrer">Pelican</a>
+        Theme: <a href="https://elegant.oncrashreboot.com/" title="Theme Elegant Home Page" target="_blank" rel="nofollow noopener noreferrer">Elegant</a>
+    </div>
+</footer>            <script src="//code.jquery.com/jquery.min.js"></script>
+        <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+        <script src="/theme/js/elegant.prod.9e9d5ce754.js"></script>
+        <script>
+            function validateForm(query)
+            {
+                return (query.length > 0);
+            }
+        </script>
+
+    <script>
+    (function () {
+        if (window.location.hash.match(/^#comment-\d+$/)) {
+            $('#comment_thread').collapse('show');
+        }
+    })();
+    window.onhashchange=function(){
+        if (window.location.hash.match(/^#comment-\d+$/))
+            window.location.reload(true);
+    }
+    $('#comment_thread').on('shown', function () {
+        var link = document.getElementById('comment-accordion-toggle');
+        var old_innerHTML = link.innerHTML;
+        $(link).fadeOut(200, function() {
+            $(this).text('Click here to hide comments').fadeIn(200);
+        });
+        $('#comment_thread').on('hidden', function () {
+            $(link).fadeOut(200, function() {
+                $(this).text(old_innerHTML).fadeIn(200);
+            });
+        })
+    })
+</script>
+
+    </body>
+    <!-- Theme: Elegant built for Pelican
+        License : MIT -->
+</html>

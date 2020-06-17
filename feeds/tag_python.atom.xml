@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>CCNY_Prep - Python</title><link href="/" rel="alternate"></link><link href="/feeds/tag_python.atom.xml" rel="self"></link><id>/</id><updated>2020-05-10T13:09:00-04:00</updated><subtitle>This is where I do test things</subtitle><entry><title>Stacks, Queues, Heaps, and Hash Tables in Python</title><link href="/blog/2020/05/10/stacks-queues-heaps-and-hash-tables-in-python/" rel="alternate"></link><published>2020-05-10T13:09:00-04:00</published><updated>2020-05-10T13:09:00-04:00</updated><author><name>David Hadaller</name></author><id>tag:None,2020-05-10:/blog/2020/05/10/stacks-queues-heaps-and-hash-tables-in-python/</id><summary type="html">&lt;p&gt;Many interview problems that rely on stacks, queues, and hash tables, could be made easier by importing some python libraries that I rarely use. Most of these are in sections &lt;a href="https://docs.python.org/3.8/library/collections.html"&gt;8.3: collections&lt;/a&gt;, and &lt;a href="https://docs.python.org/3.8/library/heapq.html?highlight=heapq#module-heapq"&gt;8.4 : heapq&lt;/a&gt;,  in the Python&amp;nbsp;documentation. &lt;/p&gt;
+&lt;h3 id="stacks-docs"&gt;Stacks (&lt;a href="https://docs.python.org/3/tutorial/datastructures.html#using-lists-as-stacks"&gt;docs&lt;/a&gt;)&lt;a class="headerlink" href="#stacks-docs" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;First, just for reference, here is the …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Many interview problems that rely on stacks, queues, and hash tables, could be made easier by importing some python libraries that I rarely use. Most of these are in sections &lt;a href="https://docs.python.org/3.8/library/collections.html"&gt;8.3: collections&lt;/a&gt;, and &lt;a href="https://docs.python.org/3.8/library/heapq.html?highlight=heapq#module-heapq"&gt;8.4 : heapq&lt;/a&gt;,  in the Python&amp;nbsp;documentation. &lt;/p&gt;
+&lt;h3 id="stacks-docs"&gt;Stacks (&lt;a href="https://docs.python.org/3/tutorial/datastructures.html#using-lists-as-stacks"&gt;docs&lt;/a&gt;)&lt;a class="headerlink" href="#stacks-docs" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;First, just for reference, here is the way to implement a python stack using a&amp;nbsp;list:&lt;/p&gt;
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+2
+3&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;stack&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="c1"&gt;# a list named &amp;quot;stack&amp;quot;&lt;/span&gt;
+&lt;span class="n"&gt;stack&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="c1"&gt;# just use regular list append to add something to the stack&lt;/span&gt;
+&lt;span class="n"&gt;stack&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;pop&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="c1"&gt;# removes the last element of our list named stack&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;Pretty simple. Just remember that, while &lt;code&gt;pop()&lt;/code&gt; is a list method in python, &lt;code&gt;push()&lt;/code&gt; isn&amp;#8217;t.&lt;/p&gt;
+&lt;h3 id="priority-queue-or-heap-docs"&gt;Priority Queue or  Heap (&lt;a href="https://docs.python.org/2/library/heapq.html"&gt;docs&lt;/a&gt;)&lt;a class="headerlink" href="#priority-queue-or-heap-docs" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;There isn&amp;#8217;t a purpose-built heap class in python. Like stacks, python heaps are implemented using a list. However, the methods for pushing, and popping and reheapifying aren&amp;#8217;t standard list methods, so they have to be&amp;nbsp;imported.&lt;/p&gt;
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+2
+3
+4
+5&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;heapq&lt;/span&gt;
+&lt;span class="n"&gt;heap&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;21&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;45&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;78&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="c1"&gt;# a python list named &amp;quot;heap&amp;quot;&lt;/span&gt;
+&lt;span class="n"&gt;heapq&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;heapify&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;heap&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="c1"&gt;# run heapify on our list named heap&lt;/span&gt;
+&lt;span class="n"&gt;heapq&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;heappop&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;heap&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="c1"&gt;# heappop pops one element off and reheapifies the list&lt;/span&gt;
+&lt;span class="n"&gt;heapq&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;heappush&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;heap&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;8&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="c1"&gt;# heappush appends 8 and reheapifies the list &lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;h3 id="queues-docs"&gt;Queues (&lt;a href="https://docs.python.org/2/library/collections.html#deque-objects"&gt;docs&lt;/a&gt;)&lt;a class="headerlink" href="#queues-docs" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;The queue must have it&amp;#8217;s own class, because removing items from the front of a python list takes O(n) time. Each and every list element has to be moved once to the left, should the first list element be removed. I&amp;#8217;m not certain as to why this is, since I had always thought that the underlying implementation of a python list was a linked list with indexed, random access pointers to each list element. At any rate, the &lt;code&gt;deque&lt;/code&gt; class, which implements the queue data structure in python, has enqueue and dequeue operations that are both&amp;nbsp;O(1).&lt;/p&gt;
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;collections.deque&lt;/span&gt;
+&lt;span class="n"&gt;queue&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;deque&lt;/span&gt;&lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Mon&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Tue&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Wed&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt; &lt;span class="c1"&gt;# create deque named &amp;quot;queue&amp;quot; from list&lt;/span&gt;
+
+&lt;span class="c1"&gt;# enter on right, leave on left&lt;/span&gt;
+&lt;span class="n"&gt;queue&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Thu&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="c1"&gt;# Append to the right&lt;/span&gt;
+&lt;span class="n"&gt;queue&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;popleft&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="c1"&gt;# Remove from the left (removes Mon)&lt;/span&gt;
+
+&lt;span class="c1"&gt;# enter on left, leave on right&lt;/span&gt;
+&lt;span class="n"&gt;queue&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;appendleft&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Sun&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="c1"&gt;# append to the left&lt;/span&gt;
+&lt;span class="n"&gt;queue&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;pop&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="c1"&gt;# Remove from the right&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;The &lt;code&gt;deque&lt;/code&gt; class implements a two sided queue. You enter from the left or the right. Consequentially, you can also implement a stack from the &lt;code&gt;deque&lt;/code&gt; class.&lt;/p&gt;
+&lt;h3 id="dictionary-or-hashtable"&gt;Dictionary or Hashtable&lt;a class="headerlink" href="#dictionary-or-hashtable" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h3&gt;
+&lt;h4 id="the-dictionary"&gt;The Dictionary&lt;a class="headerlink" href="#the-dictionary" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h4&gt;
+&lt;p&gt;Suppose you have a string &lt;code&gt;s&lt;/code&gt;. You can keep a tally of the number of letters of each kind in the word with a Python&amp;nbsp;dictionary. &lt;/p&gt;
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+2
+3
+4
+5
+6
+7&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;s&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;letters&amp;quot;&lt;/span&gt;
+&lt;span class="n"&gt;d&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{}&lt;/span&gt;
+&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;char&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;char&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="c1"&gt;#check if the character exists in the dictionary&lt;/span&gt;
+        &lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;char&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;+=&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="c1"&gt;#if it does, increment&lt;/span&gt;
+    &lt;span class="k"&gt;else&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; 
+        &lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;char&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="c1"&gt;#if not, initialize to 1&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;h4 id="counter-objects-docs"&gt;Counter Objects (&lt;a href="https://docs.python.org/2/library/collections.html#counter-objects"&gt;docs&lt;/a&gt;)&lt;a class="headerlink" href="#counter-objects-docs" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h4&gt;
+&lt;p&gt;Counters are a subclass of dictionaries, designed to keep tallies. You can pass any iterable and each element in the iterable (letters in a string, elements in a list, items in a dictionary.)  Basically a Counter is a dictionary,&amp;nbsp;but &lt;/p&gt;
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+2
+3
+4
+5
+6
+7
+8&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c1"&gt;# normal dictionary&lt;/span&gt;
+&lt;span class="n"&gt;d&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{}&lt;/span&gt; 
+&lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;a&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="c1"&gt;# returns KeyError: &amp;#39;a&amp;#39;&lt;/span&gt;
+
+&lt;span class="c1"&gt;# counter dictionary &lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;collections&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;Counter&lt;/span&gt;
+&lt;span class="n"&gt;c&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Counter&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;span class="n"&gt;c&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;a&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="c1"&gt;# initializes a dictionary element with default value of {&amp;#39;a&amp;#39;: 0} AND returns 0&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;Here is how you would take a tally using &lt;code&gt;Counter&lt;/code&gt;.&lt;/p&gt;
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+2
+3&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c1"&gt;# Tally occurrences of words in a list&lt;/span&gt;
+&lt;span class="n"&gt;cnt&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Counter&lt;/span&gt;&lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;red&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;blue&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;red&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;green&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;blue&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;blue&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+&lt;span class="n"&gt;cnt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;most_common&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="c1"&gt;# returns list of tuples with count [(&amp;#39;blue&amp;#39;, 3), (&amp;#39;red&amp;#39;, 2), (&amp;#39;green&amp;#39;, 1)]&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;h4 id="default-dictionary-docs"&gt;Default Dictionary (&lt;a href="https://docs.python.org/2/library/collections.html#defaultdict-objects"&gt;docs&lt;/a&gt;)&lt;a class="headerlink" href="#default-dictionary-docs" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h4&gt;
+&lt;p&gt;Like the &lt;code&gt;Counter&lt;/code&gt; objects, &lt;code&gt;defaultdict&lt;/code&gt; objects do not return key errors. Default dictionaries allow you to pass a lambda function as an argument that will be run whenever a value can&amp;#8217;t be found for a given&amp;nbsp;key.&lt;/p&gt;
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+2&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;dd&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;defaultdict&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;lambda&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;None&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;{})&lt;/span&gt; &lt;span class="c1"&gt;# this default dict creates key:None in dictionary whenever key doesn&amp;#39;t already exist&lt;/span&gt;
+&lt;span class="n"&gt;dd&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;a&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="c1"&gt;# returns None instead of KeyError&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</content><category term="David"></category><category term="Python"></category><category term="Data Structures"></category></entry></feed>

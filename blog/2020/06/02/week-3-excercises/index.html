@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="/theme/css/style.min.css?fc5adb95">
+
+        <link rel="dns-prefetch" href="//fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+
+        <meta name="google-site-verification" content="Bk4Z5ucHLyPXqlZlj5LzANpYBBSvxqBW4E8i-Kwf-bQ" />        <meta name="msvalidate.01" content="8FF1B025212A47B5B27CC47163A042F0" />        <meta name="author" content="David Hadaller" />
+
+        <meta property="og:type" content="article" />
+        <meta name="twitter:card" content="summary">
+
+<meta name="keywords" content="Week 3, Excercises, LeetCode, Weekly Lessons, " />
+
+<meta property="og:title" content="Week 3 Excercises "/>
+<meta property="og:url" content="/blog/2020/06/02/week-3-excercises/" />
+<meta property="og:description" content="Goals¶ Practice time and space complexity analysis Get comfortable with problem identification Review linked lists, hash table, stacks, queues, heaps problems Wednesday¶ Trapping Rain Water II - LeetCode Largest Rectangle in Histogram - LeetCode Smallest Range I - LeetCode Thursday¶ Sort Characters By Frequency - LeetCode Daily Temperatures - LeetCode 4Sum - LeetCode Read time complexity …" />
+<meta property="og:site_name" content="CCNY_Prep" />
+<meta property="og:article:author" content="David Hadaller" />
+<meta property="og:article:published_time" content="2020-06-02T03:26:00-04:00" />
+<meta name="twitter:title" content="Week 3 Excercises ">
+<meta name="twitter:description" content="Goals¶ Practice time and space complexity analysis Get comfortable with problem identification Review linked lists, hash table, stacks, queues, heaps problems Wednesday¶ Trapping Rain Water II - LeetCode Largest Rectangle in Histogram - LeetCode Smallest Range I - LeetCode Thursday¶ Sort Characters By Frequency - LeetCode Daily Temperatures - LeetCode 4Sum - LeetCode Read time complexity …">
+
+        <title>Week 3 Excercises  · CCNY_Prep
+</title>
+        <link href="/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="CCNY_Prep - Full Atom Feed" />
+        <link href="/feeds/all.rss" type="application/rss+xml" rel="alternate" title="CCNY_Prep - Full RSS Feed" />
+
+
+
+    </head>
+    <body>
+        <div id="content">
+            <div class="navbar navbar-static-top">
+                <div class="navbar-inner">
+                    <div class="container-fluid">
+                        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </a>
+                        <a class="brand" href="/"><span class=site-name>CCNY_Prep</span></a>
+                        <div class="nav-collapse collapse">
+                            <ul class="nav pull-right top-menu">
+                                <li >
+                                    <a href=
+                                       "/"
+                                    >Home</a>
+                                </li>
+                                <li ><a href="/about/">About</a></li>
+                                <li ><a href="/umpire/"><span class="caps">UMPIRE</span></a></li>
+                                <li ><a href="/categories">Categories</a></li>
+                                <li ><a href="/tags">Tags</a></li>
+                                <li ><a href="/archives">Archives</a></li>
+                                <li><form class="navbar-search" action="/search.html" onsubmit="return validateForm(this.elements['q'].value);"> <input type="text" class="search-query" placeholder="Search" name="q" id="tipue_search_input"></form></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid">
+                <div class="row-fluid">
+                    <div class="span1"></div>
+                    <div class="span10">
+<article itemscope>
+<div class="row-fluid">
+    <header class="page-header span10 offset2">
+        <h1>
+            <a href="/blog/2020/06/02/week-3-excercises/">
+                Week 3&nbsp;Excercises
+            </a>
+        </h1>
+    </header>
+</div>
+
+<div class="row-fluid">
+        <div class="span8 offset2 article-content">
+            
+            <h3 id="goals">Goals<a class="headerlink" href="#goals" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Practice time and space complexity&nbsp;analysis</li>
+<li>Get comfortable with problem&nbsp;identification</li>
+<li>Review linked lists, hash table, stacks, queues, heaps&nbsp;problems</li>
+</ul>
+<h2 id="wednesday">Wednesday<a class="headerlink" href="#wednesday" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="https://leetcode.com/problems/trapping-rain-water-ii/description/">Trapping Rain Water <span class="caps">II</span> -&nbsp;LeetCode</a></li>
+<li>
+<p><a href="https://leetcode.com/problems/largest-rectangle-in-histogram/description/">Largest Rectangle in Histogram -&nbsp;LeetCode</a></p>
+</li>
+<li>
+<p><a href="https://leetcode.com/problems/smallest-range-i/">Smallest Range I -&nbsp;LeetCode</a></p>
+</li>
+</ul>
+<h2 id="thursday">Thursday<a class="headerlink" href="#thursday" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="https://leetcode.com/problems/sort-characters-by-frequency/description/">Sort Characters By Frequency -&nbsp;LeetCode</a></li>
+<li><a href="https://leetcode.com/problems/daily-temperatures/description/">Daily Temperatures -&nbsp;LeetCode</a></li>
+<li><a href="https://leetcode.com/problems/4sum/description/">4Sum -&nbsp;LeetCode</a></li>
+</ul>
+<p>Read time complexity&nbsp;articles:</p>
+<ul>
+<li><a href="https://github.com/codepath/compsci_guides/wiki/Big-O-Complexity-Analysis">Big O Complexity Analysis · codepath/compsci_guides&nbsp;Wiki</a></li>
+<li><a href="https://www.interviewcake.com/article/java/big-o-notation-time-and-space-complexity">Big O Notation | Interview&nbsp;Cake</a></li>
+<li><a href="https://www.interviewcake.com/article/java/logarithms">Logarithms for algorithmic coding interviews | Interview&nbsp;Cake</a></li>
+</ul>
+<h2 id="saturday">Saturday<a class="headerlink" href="#saturday" title="Permanent link">&para;</a></h2>
+<p>Work through the time complexity problems from <a href="https://www.interviewbit.com/courses/programming/topics/time-complexity/">Interview Bit</a>. Do as many problems as you can in these&nbsp;sections:</p>
+<ul>
+<li>basic&nbsp;primer</li>
+<li>math</li>
+<li>compare&nbsp;functions</li>
+</ul>
+<p>After that, we will work through the following problems using <span class="caps">UMPIRE</span></p>
+<ul>
+<li><a href="https://leetcode.com/problems/evaluate-reverse-polish-notation/description/">Evaluate Reverse Polish Notation -&nbsp;LeetCode</a></li>
+<li><a href="https://leetcode.com/problems/trapping-rain-water/description/">Trapping Rain Water -&nbsp;LeetCode</a></li>
+</ul>
+<p><strong>Talk through problems</strong> - Select one person to code  the solution and rotate for the next question. The other person should  work with the coder to come up with a solution. This isn&#8217;t just about  getting a correct solution but also effective&nbsp;communication.</p>
+<ul>
+<li>Come up with a few new example input/&nbsp;outputs</li>
+<li>Talk about the edge&nbsp;cases</li>
+<li>Talk about different&nbsp;approaches</li>
+<li>Pseudocode</li>
+<li>Code the solution (talk throughout this&nbsp;segment!)</li>
+<li>Test your&nbsp;solution</li>
+<li>After completing a problem, scroll down to the bottom of this tab to  find the solution links and discuss/compare your solution with the  solution given. Is the one you&#8217;ve developed less efficient or less  concise? Repeat this and work through the exercises&nbsp;below.</li>
+</ul>
+
+
+             
+ 
+                <p id="post-share-links">
+    Like this post? Share on:
+      <a href="https://twitter.com/intent/tweet?text=Week%203%C2%A0Excercises&url=/blog/2020/06/02/week-3-excercises/&hashtags=week-3,excercises,leetcode" target="_blank" rel="nofollow noopener noreferrer" title="Share on Twitter">Twitter</a>
+ ❄       <a href="https://www.facebook.com/sharer/sharer.php?u=/blog/2020/06/02/week-3-excercises/" target="_blank" rel="nofollow noopener noreferrer" title="Share on Facebook">Facebook</a>
+ ❄       <a href="mailto:?subject=Week%203%C2%A0Excercises&amp;body=/blog/2020/06/02/week-3-excercises/" target="_blank" rel="nofollow noopener noreferrer" title="Share via Email">Email</a>
+
+            
+            
+
+
+
+
+
+
+
+            <hr/>
+<section>
+    <h2>Keep Reading</h2>
+<ul class="related-posts-list">
+<li><a href="/blog/2020/06/04/84-largest-rectangle-in-histogram-david/" title="84 Largest Rectangle in Histogram (David)">84 Largest Rectangle in Histogram (David)</a></li>
+<li><a href="/blog/2020/06/07/week-4-excercises/" title="Week 4 Excercises">Week 4 Excercises</a></li>
+<li><a href="/blog/2020/06/09/112-path-sum-david/" title="112 Path Sum (David)">112 Path Sum (David)</a></li>
+<li><a href="/blog/2020/06/09/404-sum-of-left-leaves-david/" title="404 Sum of Left Leaves (David)">404 Sum of Left Leaves (David)</a></li>
+<li><a href="/blog/2020/06/16/week-5-excercises/" title="Week 5 Excercises">Week 5 Excercises</a></li>
+</ul>
+<hr />
+</section>
+            <aside>
+            <nav>
+            <ul class="articles-timeline">
+                <li class="previous-article">« <a href="/blog/2020/05/26/week-2-excercises/" title="Previous: Week 2 Excercises">Week 2 Excercises</a></li>
+                <li class="next-article"><a href="/blog/2020/06/04/84-largest-rectangle-in-histogram-david/" title="Next: 84 Largest Rectangle in Histogram (David)">84 Largest Rectangle in Histogram (David)</a> »</li>
+            </ul>
+            </nav>
+            </aside>
+        </div>
+        <section id="article-sidebar" class="span2">
+            <h4>Published</h4>
+            <time itemprop="dateCreated" datetime="2020-06-02T03:26:00-04:00">Tue 02 June 2020</time>
+            <h4>Category</h4>
+            <a class="category-link" href="/categories#weekly-lessons-ref">Weekly Lessons</a>
+            <h4>Tags</h4>
+            <ul class="list-of-tags tags-in-article">
+                <li><a href="/tags#excercises-ref">Excercises
+                    <span class="superscript">6</span>
+</a></li>
+                <li><a href="/tags#leetcode-ref">LeetCode
+                    <span class="superscript">28</span>
+</a></li>
+                <li><a href="/tags#week-3-ref">Week 3
+                    <span class="superscript">4</span>
+</a></li>
+            </ul>
+            
+
+
+
+
+
+            
+
+
+
+
+
+        </section>
+</div>
+</article>
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe.
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides.
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo https://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>                    </div>
+                    <div class="span1"></div>
+                </div>
+            </div>
+        </div>
+<footer>
+
+    <div>
+        <span class="site-name">CCNY_Prep</span> - This is where I do test things
+    </div>
+
+
+
+    <div id="fpowered">
+        Powered by: <a href="http://getpelican.com/" title="Pelican Home Page" target="_blank" rel="nofollow noopener noreferrer">Pelican</a>
+        Theme: <a href="https://elegant.oncrashreboot.com/" title="Theme Elegant Home Page" target="_blank" rel="nofollow noopener noreferrer">Elegant</a>
+    </div>
+</footer>            <script src="//code.jquery.com/jquery.min.js"></script>
+        <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+        <script src="/theme/js/elegant.prod.9e9d5ce754.js"></script>
+        <script>
+            function validateForm(query)
+            {
+                return (query.length > 0);
+            }
+        </script>
+
+    <script>
+    (function () {
+        if (window.location.hash.match(/^#comment-\d+$/)) {
+            $('#comment_thread').collapse('show');
+        }
+    })();
+    window.onhashchange=function(){
+        if (window.location.hash.match(/^#comment-\d+$/))
+            window.location.reload(true);
+    }
+    $('#comment_thread').on('shown', function () {
+        var link = document.getElementById('comment-accordion-toggle');
+        var old_innerHTML = link.innerHTML;
+        $(link).fadeOut(200, function() {
+            $(this).text('Click here to hide comments').fadeIn(200);
+        });
+        $('#comment_thread').on('hidden', function () {
+            $(link).fadeOut(200, function() {
+                $(this).text(old_innerHTML).fadeIn(200);
+            });
+        })
+    })
+</script>
+
+    </body>
+    <!-- Theme: Elegant built for Pelican
+        License : MIT -->
+</html>

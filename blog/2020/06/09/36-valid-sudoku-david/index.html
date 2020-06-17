@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="/theme/css/style.min.css?fc5adb95">
+
+        <link rel="dns-prefetch" href="//fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+
+        <meta name="google-site-verification" content="Bk4Z5ucHLyPXqlZlj5LzANpYBBSvxqBW4E8i-Kwf-bQ" />        <meta name="msvalidate.01" content="8FF1B025212A47B5B27CC47163A042F0" />        <meta name="author" content="David Hadaller" />
+
+        <meta property="og:type" content="article" />
+        <meta name="twitter:card" content="summary">
+
+<meta name="keywords" content="Week 2, LeetCode, David, " />
+
+<meta property="og:title" content="36 Valid Sudoku (David) "/>
+<meta property="og:url" content="/blog/2020/06/09/36-valid-sudoku-david/" />
+<meta property="og:description" content="Here we solve the Valid Sudoku Problem from LeetCode. Determine if a 9x9 Sudoku board is valid. Only the filled cells need to be validated according to the following rules: Each row must contain the digits 1-9 without repetition. Each column must contain the digits 1-9 without repetition. Each of …" />
+<meta property="og:site_name" content="CCNY_Prep" />
+<meta property="og:article:author" content="David Hadaller" />
+<meta property="og:article:published_time" content="2020-06-09T17:00:00-04:00" />
+<meta name="twitter:title" content="36 Valid Sudoku (David) ">
+<meta name="twitter:description" content="Here we solve the Valid Sudoku Problem from LeetCode. Determine if a 9x9 Sudoku board is valid. Only the filled cells need to be validated according to the following rules: Each row must contain the digits 1-9 without repetition. Each column must contain the digits 1-9 without repetition. Each of …">
+
+        <title>36 Valid Sudoku (David)  · CCNY_Prep
+</title>
+        <link href="/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="CCNY_Prep - Full Atom Feed" />
+        <link href="/feeds/all.rss" type="application/rss+xml" rel="alternate" title="CCNY_Prep - Full RSS Feed" />
+
+
+
+    </head>
+    <body>
+        <div id="content">
+            <div class="navbar navbar-static-top">
+                <div class="navbar-inner">
+                    <div class="container-fluid">
+                        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </a>
+                        <a class="brand" href="/"><span class=site-name>CCNY_Prep</span></a>
+                        <div class="nav-collapse collapse">
+                            <ul class="nav pull-right top-menu">
+                                <li >
+                                    <a href=
+                                       "/"
+                                    >Home</a>
+                                </li>
+                                <li ><a href="/about/">About</a></li>
+                                <li ><a href="/umpire/"><span class="caps">UMPIRE</span></a></li>
+                                <li ><a href="/categories">Categories</a></li>
+                                <li ><a href="/tags">Tags</a></li>
+                                <li ><a href="/archives">Archives</a></li>
+                                <li><form class="navbar-search" action="/search.html" onsubmit="return validateForm(this.elements['q'].value);"> <input type="text" class="search-query" placeholder="Search" name="q" id="tipue_search_input"></form></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid">
+                <div class="row-fluid">
+                    <div class="span1"></div>
+                    <div class="span10">
+<article itemscope>
+<div class="row-fluid">
+    <header class="page-header span10 offset2">
+        <h1>
+            <a href="/blog/2020/06/09/36-valid-sudoku-david/">
+                36 Valid Sudoku&nbsp;(David)
+            </a>
+        </h1>
+    </header>
+</div>
+
+<div class="row-fluid">
+        <div class="span8 offset2 article-content">
+            
+            <p>Here we solve the <a href="https://leetcode.com/problems/valid-sudoku/">Valid Sudoku Problem</a> from&nbsp;LeetCode.</p>
+<blockquote>
+<p>Determine if a 9x9 Sudoku board is valid. Only the filled cells need to be validated <strong>according to the following rules</strong>:</p>
+<ol>
+<li>Each row must contain the digits <code>1-9</code> without&nbsp;repetition.</li>
+<li>Each column must contain the digits <code>1-9</code> without&nbsp;repetition.</li>
+<li>Each of the 9 <code>3x3</code> sub-boxes of the grid must contain the digits <code>1-9</code> without&nbsp;repetition.</li>
+</ol>
+<p><img alt="img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/Sudoku-by-L2G-20050714.svg/250px-Sudoku-by-L2G-20050714.svg.png">
+ A partially filled sudoku which is&nbsp;valid.</p>
+<p>The Sudoku board could be partially filled, where empty cells are filled with the character <code>'.'</code>.</p>
+<p><strong>Example&nbsp;1:</strong></p>
+<p><code>Input:
+[
+  ["5","3",".",".","7",".",".",".","."],
+  ["6",".",".","1","9","5",".",".","."],
+  [".","9","8",".",".",".",".","6","."],
+  ["8",".",".",".","6",".",".",".","3"],
+  ["4",".",".","8",".","3",".",".","1"],
+  ["7",".",".",".","2",".",".",".","6"],
+  [".","6",".",".",".",".","2","8","."],
+  [".",".",".","4","1","9",".",".","5"],
+  [".",".",".",".","8",".",".","7","9"]
+]
+Output: true</code></p>
+<p><strong>Example&nbsp;2:</strong></p>
+<p><code>Input:
+[
+  ["8","3",".",".","7",".",".",".","."],
+  ["6",".",".","1","9","5",".",".","."],
+  [".","9","8",".",".",".",".","6","."],
+  ["8",".",".",".","6",".",".",".","3"],
+  ["4",".",".","8",".","3",".",".","1"],
+  ["7",".",".",".","2",".",".",".","6"],
+  [".","6",".",".",".",".","2","8","."],
+  [".",".",".","4","1","9",".",".","5"],
+  [".",".",".",".","8",".",".","7","9"]
+]
+Output: false
+Explanation: Same as Example 1, except with the 5 in the top left corner being 
+    modified to 8. Since there are two 8's in the top left 3x3 sub-box, it is invalid.</code></p>
+<p><strong>Note:</strong></p>
+<ul>
+<li>A Sudoku board (partially filled) could be valid but is not necessarily&nbsp;solvable.</li>
+<li>Only the filled cells need to be validated according to the mentioned&nbsp;rules.</li>
+<li>The given board contain only digits <code>1-9</code> and the character <code>'.'</code>.</li>
+<li>The given board size is always <code>9x9</code>.</li>
+</ul>
+</blockquote>
+<p>This solution holds all data in a set called <code>big</code> instead of using separate data structures for the rows, columns and boxes. Rows that already have a given number are placed in <code>big</code> as <code>(row, cell)</code> tuples, where <code>cell</code> is the number the <code>row</code> already contains. Columns reverse the tuple order with <code>(cell, col)</code> tuples. And the boxes use integer division to find the value of the nearest upper-left-hand corner with <code>row//3</code> and <code>col//3</code> .  This means that the 3-tuple <code>(row//3, col//3, cell)</code> associates each number in <code>cell</code> with the closest upper-left-hand&nbsp;corner.</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">isValidSudoku</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">board</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+
+        <span class="n">big</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">9</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">9</span><span class="p">):</span>
+
+                <span class="k">if</span> <span class="n">board</span><span class="p">[</span><span class="n">row</span><span class="p">][</span><span class="n">col</span><span class="p">]</span><span class="o">!=</span><span class="s1">&#39;.&#39;</span><span class="p">:</span>
+
+                    <span class="n">cell</span> <span class="o">=</span> <span class="n">board</span><span class="p">[</span><span class="n">row</span><span class="p">][</span><span class="n">col</span><span class="p">]</span>
+
+                    <span class="k">if</span> <span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">cell</span><span class="p">)</span> <span class="ow">in</span> <span class="n">big</span> <span class="ow">or</span> <span class="p">(</span><span class="n">cell</span><span class="p">,</span><span class="n">col</span><span class="p">)</span> <span class="ow">in</span> <span class="n">big</span> <span class="ow">or</span> <span class="p">(</span><span class="n">row</span><span class="o">//</span><span class="mi">3</span><span class="p">,</span><span class="n">col</span><span class="o">//</span><span class="mi">3</span><span class="p">,</span><span class="n">cell</span><span class="p">)</span> <span class="ow">in</span> <span class="n">big</span><span class="p">:</span>
+                        <span class="k">return</span> <span class="kc">False</span>
+
+                    <span class="n">big</span><span class="o">.</span><span class="n">add</span><span class="p">((</span><span class="n">row</span><span class="p">,</span> <span class="n">cell</span><span class="p">))</span>
+                    <span class="n">big</span><span class="o">.</span><span class="n">add</span><span class="p">((</span><span class="n">cell</span><span class="p">,</span><span class="n">col</span><span class="p">))</span>
+                    <span class="n">big</span><span class="o">.</span><span class="n">add</span><span class="p">((</span><span class="n">row</span><span class="o">//</span><span class="mi">3</span><span class="p">,</span><span class="n">col</span><span class="o">//</span><span class="mi">3</span><span class="p">,</span><span class="n">cell</span><span class="p">))</span>
+        <span class="k">return</span> <span class="kc">True</span>
+</code></pre></div>
+</td></tr></table>
+
+
+             
+ 
+                <p id="post-share-links">
+    Like this post? Share on:
+      <a href="https://twitter.com/intent/tweet?text=36%20Valid%20Sudoku%C2%A0%28David%29&url=/blog/2020/06/09/36-valid-sudoku-david/&hashtags=week-2,leetcode" target="_blank" rel="nofollow noopener noreferrer" title="Share on Twitter">Twitter</a>
+ ❄       <a href="https://www.facebook.com/sharer/sharer.php?u=/blog/2020/06/09/36-valid-sudoku-david/" target="_blank" rel="nofollow noopener noreferrer" title="Share on Facebook">Facebook</a>
+ ❄       <a href="mailto:?subject=36%20Valid%20Sudoku%C2%A0%28David%29&amp;body=/blog/2020/06/09/36-valid-sudoku-david/" target="_blank" rel="nofollow noopener noreferrer" title="Share via Email">Email</a>
+
+            
+            
+
+
+
+
+
+
+
+            <hr/>
+<section>
+    <h2>Keep Reading</h2>
+<ul class="related-posts-list">
+<li><a href="/blog/2020/05/26/week-2-excercises/" title="Week 2 Excercises">Week 2 Excercises</a></li>
+<li><a href="/blog/2020/06/09/202-happy-number-david/" title="202 Happy Number (David)">202 Happy Number (David)</a></li>
+<li><a href="/blog/2020/06/09/232-implement-queue-using-stacks-david/" title="232 Implement Queue using Stacks (David)">232 Implement Queue using Stacks (David)</a></li>
+<li><a href="/blog/2020/06/09/373-find-k-pairs-with-smallest-sums-david/" title="373 Find K Pairs with Smallest Sums (David)">373 Find K Pairs with Smallest Sums (David)</a></li>
+<li><a href="/blog/2020/06/09/692-top-k-frequent-words-david/" title="692 Top K Frequent Words (David)">692 Top K Frequent Words (David)</a></li>
+</ul>
+<hr />
+</section>
+            <aside>
+            <nav>
+            <ul class="articles-timeline">
+                <li class="previous-article">« <a href="/blog/2020/06/09/373-find-k-pairs-with-smallest-sums-david/" title="Previous: 373 Find K Pairs with Smallest Sums (David)">373 Find K Pairs with Smallest Sums (David)</a></li>
+                <li class="next-article"><a href="/blog/2020/06/09/232-implement-queue-using-stacks-david/" title="Next: 232 Implement Queue using Stacks (David)">232 Implement Queue using Stacks (David)</a> »</li>
+            </ul>
+            </nav>
+            </aside>
+        </div>
+        <section id="article-sidebar" class="span2">
+            <h4>Published</h4>
+            <time itemprop="dateCreated" datetime="2020-06-09T17:00:00-04:00">Tue 09 June 2020</time>
+            <h4>Category</h4>
+            <a class="category-link" href="/categories#david-ref">David</a>
+            <h4>Tags</h4>
+            <ul class="list-of-tags tags-in-article">
+                <li><a href="/tags#leetcode-ref">LeetCode
+                    <span class="superscript">28</span>
+</a></li>
+                <li><a href="/tags#week-2-ref">Week 2
+                    <span class="superscript">6</span>
+</a></li>
+            </ul>
+            
+
+
+
+
+
+            
+
+
+
+
+
+        </section>
+</div>
+</article>
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe.
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides.
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo https://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>                    </div>
+                    <div class="span1"></div>
+                </div>
+            </div>
+        </div>
+<footer>
+
+    <div>
+        <span class="site-name">CCNY_Prep</span> - This is where I do test things
+    </div>
+
+
+
+    <div id="fpowered">
+        Powered by: <a href="http://getpelican.com/" title="Pelican Home Page" target="_blank" rel="nofollow noopener noreferrer">Pelican</a>
+        Theme: <a href="https://elegant.oncrashreboot.com/" title="Theme Elegant Home Page" target="_blank" rel="nofollow noopener noreferrer">Elegant</a>
+    </div>
+</footer>            <script src="//code.jquery.com/jquery.min.js"></script>
+        <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+        <script src="/theme/js/elegant.prod.9e9d5ce754.js"></script>
+        <script>
+            function validateForm(query)
+            {
+                return (query.length > 0);
+            }
+        </script>
+
+    <script>
+    (function () {
+        if (window.location.hash.match(/^#comment-\d+$/)) {
+            $('#comment_thread').collapse('show');
+        }
+    })();
+    window.onhashchange=function(){
+        if (window.location.hash.match(/^#comment-\d+$/))
+            window.location.reload(true);
+    }
+    $('#comment_thread').on('shown', function () {
+        var link = document.getElementById('comment-accordion-toggle');
+        var old_innerHTML = link.innerHTML;
+        $(link).fadeOut(200, function() {
+            $(this).text('Click here to hide comments').fadeIn(200);
+        });
+        $('#comment_thread').on('hidden', function () {
+            $(link).fadeOut(200, function() {
+                $(this).text(old_innerHTML).fadeIn(200);
+            });
+        })
+    })
+</script>
+
+    </body>
+    <!-- Theme: Elegant built for Pelican
+        License : MIT -->
+</html>

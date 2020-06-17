@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0"><channel><title>CCNY_Prep - Week 5</title><link>/</link><description>This is where I do test things</description><lastBuildDate>Tue, 16 Jun 2020 08:26:00 -0400</lastBuildDate><item><title>Week 5 Excercises</title><link>/blog/2020/06/16/week-5-excercises/</link><description>&lt;h2 id="goals"&gt;Goals&lt;a class="headerlink" href="#goals" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Understand various graph&amp;nbsp;representations&lt;/li&gt;
+&lt;li&gt;Recognize problems that can be solved with&amp;nbsp;graphs&lt;/li&gt;
+&lt;li&gt;Know how to quickly implement graph searches (&lt;span class="caps"&gt;BFS&lt;/span&gt;, &lt;span class="caps"&gt;DFS&lt;/span&gt;)&lt;/li&gt;
+&lt;li&gt;Recognize topological sort graph&amp;nbsp;problems&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Keep in mind that during interviews coding questions are usually allotted 30-40 minutes. Given that time constraint, you should aim to spend around 15-20 minutes on each problem. So, figure out how to work through a particular class of problems, and then revisit them later on to cut down the time you spend on each&amp;nbsp;problem.&lt;/p&gt;
+&lt;h2 id="tuesday"&gt;Tuesday&lt;a class="headerlink" href="#tuesday" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Read the following articles and watch the youtube playlist that walks through graph&amp;nbsp;problems.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://github.com/codepath/compsci_guides/wiki/Graphs"&gt;Graphs · codepath/compsci_guides&amp;nbsp;Wiki&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/codepath/compsci_guides/wiki/Graph-Traversals"&gt;Graph Traversals · codepath/compsci_guides&amp;nbsp;Wiki&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/codepath/compsci_guides/wiki/Topological-Sort"&gt;Topological Sort · codepath/compsci_guides&amp;nbsp;Wiki&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/playlist?list=PL7zKQzeqjecKpXlM9hd_jA-9PZ6EZGzd0"&gt;Detect Cycle in Directed Graph -&amp;nbsp;YouTube&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="thursday"&gt;Thursday&lt;a class="headerlink" href="#thursday" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://www.geeksforgeeks.org/sum-dependencies-graph/"&gt;Sum of dependencies in a graph -&amp;nbsp;GeeksforGeeks&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.geeksforgeeks.org/number-sink-nodes-graph/"&gt;Number of sink nodes in a graph -&amp;nbsp;GeeksforGeeks&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="saturday"&gt;Saturday&lt;a class="headerlink" href="#saturday" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://leetcode.com/problems/is-graph-bipartite/description/"&gt;Is Graph Bipartite? -&amp;nbsp;LeetCode&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://leetcode.com/problems/minimum-height-trees/description/"&gt;Minimum Height Trees -&amp;nbsp;LeetCode&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://leetcode.com/problems/clone-graph/description/"&gt;Clone Graph -&amp;nbsp;LeetCode&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="other-problems"&gt;Other Problems&lt;a class="headerlink" href="#other-problems" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://leetcode.com/problems/evaluate-division/description/"&gt;Evaluate Division -&amp;nbsp;LeetCode&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://leetcode.com/problems/kth-smallest-element-in-a-bst/description/"&gt;Kth Smallest Element in a &lt;span class="caps"&gt;BST&lt;/span&gt; -&amp;nbsp;LeetCode&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/description/"&gt;Lowest Common Ancestor of a Binary Tree -&amp;nbsp;LeetCode&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.hackerrank.com/challenges/journey-to-the-moon/problem"&gt;Journey to the Moon |&amp;nbsp;HackerRank&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="other-resources"&gt;Other Resources&lt;a class="headerlink" href="#other-resources" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;(This section covers algorithms that will come up less frequently in interviews.)
+- &lt;a href="https://www.hackerearth.com/practice/notes/disjoint-set-union-union-find/"&gt;Union Find, Disjoint Sets Guide&lt;/a&gt;
+- &lt;a href="https://leetcode.com/tag/union-find/"&gt;Union Find, Disjoint Sets Interview question bank&lt;/a&gt;
+- &lt;a href="https://www.hackerearth.com/practice/algorithms/graphs/shortest-path-algorithms/tutorial/"&gt;Shortest Paths Algorithms Guide&lt;/a&gt;
+- &lt;a href="https://www.hackerearth.com/practice/algorithms/graphs/shortest-path-algorithms/practice-problems/"&gt;Shortest Paths Algorithms Interview Question Bank&lt;/a&gt;
+- &lt;a href="https://www.hackerearth.com/practice/algorithms/graphs/minimum-spanning-tree/tutorial/"&gt;Minimum Spanning Trees Guide&lt;/a&gt;
+- &lt;a href="https://www.hackerearth.com/practice/algorithms/graphs/minimum-spanning-tree/practice-problems/"&gt;Minimum Spanning Trees Interview Question&amp;nbsp;Bank&lt;/a&gt;&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">David Hadaller</dc:creator><pubDate>Tue, 16 Jun 2020 08:26:00 -0400</pubDate><guid isPermaLink="false">tag:None,2020-06-16:/blog/2020/06/16/week-5-excercises/</guid><category>Weekly Lessons</category><category>Week 5</category><category>Excercises</category><category>LeetCode</category></item></channel></rss>

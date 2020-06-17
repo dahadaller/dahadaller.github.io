@@ -1,0 +1,421 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0"><channel><title>CCNY_Prep - Week 2</title><link>/</link><description>This is where I do test things</description><lastBuildDate>Tue, 09 Jun 2020 17:00:00 -0400</lastBuildDate><item><title>202 Happy Number (David)</title><link>/blog/2020/06/09/202-happy-number-david/</link><description>&lt;p&gt;Here we solve the &lt;a href="https://leetcode.com/problems/happy-number/"&gt;Happy Number Problem&lt;/a&gt; from&amp;nbsp;LeetCode.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Write an algorithm to determine if a number &lt;code&gt;n&lt;/code&gt; is&amp;nbsp;&amp;#8220;happy&amp;#8221;.&lt;/p&gt;
+&lt;p&gt;A happy number is a number defined by the following process: Starting with any positive integer, replace the number by the sum of the squares of its digits, and repeat the process until the number equals 1 (where  it will stay), or it &lt;strong&gt;loops endlessly in a cycle&lt;/strong&gt; which does not include 1. Those numbers for which this process &lt;strong&gt;ends in 1&lt;/strong&gt; are happy&amp;nbsp;numbers.&lt;/p&gt;
+&lt;p&gt;Return True if &lt;code&gt;n&lt;/code&gt; is a happy number, and False if&amp;nbsp;not.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Example:&lt;/strong&gt; &lt;/p&gt;
+&lt;p&gt;&lt;code&gt;Input: 19
+Output: true
+Explanation: 
+12 + 92 = 82
+82 + 22 = 68
+62 + 82 = 100
+12 + 02 + 02 = 1&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;The trick to this problem is you have to keep a record of the happy numbers already encountered, and you have to be able to iterate through the individual digits of a number. In this approach, I used a set &lt;code&gt;previous_numbers&lt;/code&gt; to keep track of the happy numbers that have already been calculated. I also converted the numbers to strings, since strings are iterable by character in Python (each character being a digit in this case) , instead of using &lt;code&gt;//&lt;/code&gt; and &lt;code&gt;%&lt;/code&gt;. &lt;/p&gt;
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Solution&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;isHappy&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="nb"&gt;bool&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+
+        &lt;span class="n"&gt;current_number&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;str&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="n"&gt;previous_numbers&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;set&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+        &lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="n"&gt;current_number&lt;/span&gt; &lt;span class="o"&gt;!=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;1&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+
+            &lt;span class="n"&gt;square_sum&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;
+
+            &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;digit&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="nb"&gt;map&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="nb"&gt;list&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;str&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;current_number&lt;/span&gt;&lt;span class="p"&gt;))):&lt;/span&gt;
+                &lt;span class="n"&gt;square_sum&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="n"&gt;digit&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;digit&lt;/span&gt;
+
+            &lt;span class="n"&gt;current_number&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;str&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;square_sum&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+            &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;current_number&lt;/span&gt; &lt;span class="ow"&gt;not&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;previous_numbers&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+                &lt;span class="n"&gt;previous_numbers&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;add&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;current_number&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+            &lt;span class="k"&gt;else&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+                &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="kc"&gt;False&lt;/span&gt;
+
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="kc"&gt;True&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">David Hadaller</dc:creator><pubDate>Tue, 09 Jun 2020 17:00:00 -0400</pubDate><guid isPermaLink="false">tag:None,2020-06-09:/blog/2020/06/09/202-happy-number-david/</guid><category>David</category><category>Week 2</category><category>LeetCode</category></item><item><title>232 Implement Queue using Stacks (David)</title><link>/blog/2020/06/09/232-implement-queue-using-stacks-david/</link><description>&lt;p&gt;This post solves the &lt;a href="https://leetcode.com/problems/implement-queue-using-stacks/"&gt;Implement Queue using Stacks - LeetCode&lt;/a&gt;&amp;nbsp;problem. &lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Implement the following operations of a queue using&amp;nbsp;stacks.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;push(x) &amp;#8212; Push element x to the back of&amp;nbsp;queue.&lt;/li&gt;
+&lt;li&gt;pop() &amp;#8212; Removes the element from in front of&amp;nbsp;queue.&lt;/li&gt;
+&lt;li&gt;peek() &amp;#8212; Get the front&amp;nbsp;element.&lt;/li&gt;
+&lt;li&gt;empty() &amp;#8212; Return whether the queue is&amp;nbsp;empty.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Example:&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class="dquo"&gt;&amp;#8220;&lt;/span&gt;`
+MyQueue queue = new&amp;nbsp;MyQueue();&lt;/p&gt;
+&lt;p&gt;queue.push(1);
+queue.push(2);&lt;br&gt;
+queue.peek();  // returns 1
+queue.pop();   // returns 1
+queue.empty(); // returns false&amp;nbsp;&amp;#8220;`&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Notes:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;You must use &lt;em&gt;only&lt;/em&gt; standard operations of a stack &amp;#8212; which means only &lt;code&gt;push to top&lt;/code&gt;, &lt;code&gt;peek/pop from top&lt;/code&gt;, &lt;code&gt;size&lt;/code&gt;, and &lt;code&gt;is empty&lt;/code&gt; operations are&amp;nbsp;valid.&lt;/li&gt;
+&lt;li&gt;Depending on your language, stack may not be supported natively.  You may simulate a stack by using a list or deque (double-ended queue),  as long as you use only standard operations of a&amp;nbsp;stack.&lt;/li&gt;
+&lt;li&gt;You may assume that all operations are valid (for example, no pop or peek operations will be called on an empty&amp;nbsp;queue).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;While in a queue there are two points of ingress and egress, stacks only have one. You can leave from the front of the queue, and enter from the back, but you can only enter and exit from the top of the stack. This solution is optimized for multiple pushes/pops in a&amp;nbsp;row. &lt;/p&gt;
+&lt;p&gt;Whenever we want to push to the queue, all data is placed in the &lt;code&gt;push_stack&lt;/code&gt;, where the front of the queue corresponds to the bottom of the &lt;code&gt;push_stack&lt;/code&gt; and the back of the queue corresponds to the top of the stack. Then, each subsequent push operation after the first one only takes O(1), since we&amp;#8217;re just pushing to the end of the&amp;nbsp;stack. &lt;/p&gt;
+&lt;p&gt;Whenever we want to pop from the front of the queue, we migrate all the data to the &lt;code&gt;pop_stack&lt;/code&gt; where it will be in reverse order compared to the &lt;code&gt;push_stack&lt;/code&gt;. The top of the &lt;code&gt;pop_stack&lt;/code&gt; corresponds to the front of the queue, so popping off the front takes O(1) just like a normal stack&amp;nbsp;pop.&lt;/p&gt;
+&lt;p&gt;So, the runtime complexity of pushing/popping to the queue are O(n) in the worst case and O(1) in the average&amp;nbsp;case.&lt;/p&gt;
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;MyQueue&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="fm"&gt;__init__&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="sd"&gt;&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+&lt;span class="sd"&gt;        Initialize your data structure here.&lt;/span&gt;
+&lt;span class="sd"&gt;        &amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+        &lt;span class="c1"&gt;# holds data for queue pushing is O(1) but popping is O(N) because&lt;/span&gt;
+        &lt;span class="c1"&gt;# beginning of queue is at bottom of stack in this implementation&lt;/span&gt;
+        &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;push_stack&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[]&lt;/span&gt; 
+        &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;pop_stack&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[]&lt;/span&gt;
+
+
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;push&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="kc"&gt;None&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="sd"&gt;&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+&lt;span class="sd"&gt;        Push element x to the back of queue.&lt;/span&gt;
+&lt;span class="sd"&gt;        &amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="ow"&gt;not&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;push_stack&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;pop_stack&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+                &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;push_stack&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;pop_stack&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;pop&lt;/span&gt;&lt;span class="p"&gt;())&lt;/span&gt;
+
+        &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;push_stack&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;pop&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="sd"&gt;&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+&lt;span class="sd"&gt;        Removes the element from in front of queue and returns that element.&lt;/span&gt;
+&lt;span class="sd"&gt;        &amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="ow"&gt;not&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;pop_stack&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;push_stack&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+                &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;pop_stack&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;push_stack&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;pop&lt;/span&gt;&lt;span class="p"&gt;())&lt;/span&gt;
+
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;pop_stack&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;pop&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;peek&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="sd"&gt;&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+&lt;span class="sd"&gt;        Get the front element.&lt;/span&gt;
+&lt;span class="sd"&gt;        &amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="ow"&gt;not&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;pop_stack&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;push_stack&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+                &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;pop_stack&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;push_stack&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;pop&lt;/span&gt;&lt;span class="p"&gt;())&lt;/span&gt;
+
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;pop_stack&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+
+
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;empty&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="nb"&gt;bool&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="sd"&gt;&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+&lt;span class="sd"&gt;        Returns whether the queue is empty.&lt;/span&gt;
+&lt;span class="sd"&gt;        &amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+        &lt;span class="n"&gt;q_len&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;max&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;len&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;push_stack&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
+                    &lt;span class="nb"&gt;len&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;pop_stack&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+                   &lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;q_len&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;
+
+
+
+&lt;span class="c1"&gt;# Your MyQueue object will be instantiated and called as such:&lt;/span&gt;
+&lt;span class="c1"&gt;# obj = MyQueue()&lt;/span&gt;
+&lt;span class="c1"&gt;# obj.push(x)&lt;/span&gt;
+&lt;span class="c1"&gt;# param_2 = obj.pop()&lt;/span&gt;
+&lt;span class="c1"&gt;# param_3 = obj.peek()&lt;/span&gt;
+&lt;span class="c1"&gt;# param_4 = obj.empty()&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">David Hadaller</dc:creator><pubDate>Tue, 09 Jun 2020 17:00:00 -0400</pubDate><guid isPermaLink="false">tag:None,2020-06-09:/blog/2020/06/09/232-implement-queue-using-stacks-david/</guid><category>David</category><category>Week 2</category><category>LeetCode</category></item><item><title>36 Valid Sudoku (David)</title><link>/blog/2020/06/09/36-valid-sudoku-david/</link><description>&lt;p&gt;Here we solve the &lt;a href="https://leetcode.com/problems/valid-sudoku/"&gt;Valid Sudoku Problem&lt;/a&gt; from&amp;nbsp;LeetCode.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Determine if a 9x9 Sudoku board is valid. Only the filled cells need to be validated &lt;strong&gt;according to the following rules&lt;/strong&gt;:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Each row must contain the digits &lt;code&gt;1-9&lt;/code&gt; without&amp;nbsp;repetition.&lt;/li&gt;
+&lt;li&gt;Each column must contain the digits &lt;code&gt;1-9&lt;/code&gt; without&amp;nbsp;repetition.&lt;/li&gt;
+&lt;li&gt;Each of the 9 &lt;code&gt;3x3&lt;/code&gt; sub-boxes of the grid must contain the digits &lt;code&gt;1-9&lt;/code&gt; without&amp;nbsp;repetition.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;img alt="img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/Sudoku-by-L2G-20050714.svg/250px-Sudoku-by-L2G-20050714.svg.png"&gt;
+ A partially filled sudoku which is&amp;nbsp;valid.&lt;/p&gt;
+&lt;p&gt;The Sudoku board could be partially filled, where empty cells are filled with the character &lt;code&gt;'.'&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Example&amp;nbsp;1:&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;Input:
+[
+  ["5","3",".",".","7",".",".",".","."],
+  ["6",".",".","1","9","5",".",".","."],
+  [".","9","8",".",".",".",".","6","."],
+  ["8",".",".",".","6",".",".",".","3"],
+  ["4",".",".","8",".","3",".",".","1"],
+  ["7",".",".",".","2",".",".",".","6"],
+  [".","6",".",".",".",".","2","8","."],
+  [".",".",".","4","1","9",".",".","5"],
+  [".",".",".",".","8",".",".","7","9"]
+]
+Output: true&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Example&amp;nbsp;2:&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;Input:
+[
+  ["8","3",".",".","7",".",".",".","."],
+  ["6",".",".","1","9","5",".",".","."],
+  [".","9","8",".",".",".",".","6","."],
+  ["8",".",".",".","6",".",".",".","3"],
+  ["4",".",".","8",".","3",".",".","1"],
+  ["7",".",".",".","2",".",".",".","6"],
+  [".","6",".",".",".",".","2","8","."],
+  [".",".",".","4","1","9",".",".","5"],
+  [".",".",".",".","8",".",".","7","9"]
+]
+Output: false
+Explanation: Same as Example 1, except with the 5 in the top left corner being 
+    modified to 8. Since there are two 8's in the top left 3x3 sub-box, it is invalid.&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;A Sudoku board (partially filled) could be valid but is not necessarily&amp;nbsp;solvable.&lt;/li&gt;
+&lt;li&gt;Only the filled cells need to be validated according to the mentioned&amp;nbsp;rules.&lt;/li&gt;
+&lt;li&gt;The given board contain only digits &lt;code&gt;1-9&lt;/code&gt; and the character &lt;code&gt;'.'&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;The given board size is always &lt;code&gt;9x9&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;This solution holds all data in a set called &lt;code&gt;big&lt;/code&gt; instead of using separate data structures for the rows, columns and boxes. Rows that already have a given number are placed in &lt;code&gt;big&lt;/code&gt; as &lt;code&gt;(row, cell)&lt;/code&gt; tuples, where &lt;code&gt;cell&lt;/code&gt; is the number the &lt;code&gt;row&lt;/code&gt; already contains. Columns reverse the tuple order with &lt;code&gt;(cell, col)&lt;/code&gt; tuples. And the boxes use integer division to find the value of the nearest upper-left-hand corner with &lt;code&gt;row//3&lt;/code&gt; and &lt;code&gt;col//3&lt;/code&gt; .  This means that the 3-tuple &lt;code&gt;(row//3, col//3, cell)&lt;/code&gt; associates each number in &lt;code&gt;cell&lt;/code&gt; with the closest upper-left-hand&amp;nbsp;corner.&lt;/p&gt;
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Solution&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;isValidSudoku&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;board&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;List&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;List&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nb"&gt;str&lt;/span&gt;&lt;span class="p"&gt;]])&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="nb"&gt;bool&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+
+        &lt;span class="n"&gt;big&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;set&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+        &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;row&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="nb"&gt;range&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;9&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+            &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;col&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="nb"&gt;range&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;9&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+
+                &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;board&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;row&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="n"&gt;col&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;!=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;.&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+
+                    &lt;span class="n"&gt;cell&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;board&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;row&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="n"&gt;col&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+
+                    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;row&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;cell&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;big&lt;/span&gt; &lt;span class="ow"&gt;or&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;cell&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;col&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;big&lt;/span&gt; &lt;span class="ow"&gt;or&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;row&lt;/span&gt;&lt;span class="o"&gt;//&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;col&lt;/span&gt;&lt;span class="o"&gt;//&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;cell&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;big&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+                        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="kc"&gt;False&lt;/span&gt;
+
+                    &lt;span class="n"&gt;big&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;add&lt;/span&gt;&lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="n"&gt;row&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;cell&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+                    &lt;span class="n"&gt;big&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;add&lt;/span&gt;&lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="n"&gt;cell&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;col&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+                    &lt;span class="n"&gt;big&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;add&lt;/span&gt;&lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="n"&gt;row&lt;/span&gt;&lt;span class="o"&gt;//&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;col&lt;/span&gt;&lt;span class="o"&gt;//&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;cell&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="kc"&gt;True&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">David Hadaller</dc:creator><pubDate>Tue, 09 Jun 2020 17:00:00 -0400</pubDate><guid isPermaLink="false">tag:None,2020-06-09:/blog/2020/06/09/36-valid-sudoku-david/</guid><category>David</category><category>Week 2</category><category>LeetCode</category></item><item><title>373 Find K Pairs with Smallest Sums (David)</title><link>/blog/2020/06/09/373-find-k-pairs-with-smallest-sums-david/</link><description>&lt;p&gt;Here we solve the &lt;a href="https://leetcode.com/problems/find-k-pairs-with-smallest-sums/"&gt;Find K Pairs with Smallest Sums&lt;/a&gt; problem from&amp;nbsp;LeetCode:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;You are given two integer arrays &lt;strong&gt;nums1&lt;/strong&gt; and &lt;strong&gt;nums2&lt;/strong&gt; sorted in ascending order and an integer &lt;strong&gt;k&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;Define a pair &lt;strong&gt;(u,v)&lt;/strong&gt; which consists of one element from the first array and one element from the second&amp;nbsp;array.&lt;/p&gt;
+&lt;p&gt;Find the k pairs &lt;strong&gt;(u1,v1),(u2,v2) &amp;#8230;(uk,vk)&lt;/strong&gt; with the smallest&amp;nbsp;sums.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Example&amp;nbsp;1:&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;Input: nums1 = [1,7,11], nums2 = [2,4,6], k = 3
+Output: [[1,2],[1,4],[1,6]] 
+Explanation: The first 3 pairs are returned from the sequence: 
+             [1,2],[1,4],[1,6],[7,2],[7,4],[11,2],[7,6],[11,4],[11,6]&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Example&amp;nbsp;2:&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;Input: nums1 = [1,1,2], nums2 = [1,2,3], k = 2
+Output: [1,1],[1,1]
+Explanation: The first 2 pairs are returned from the sequence: 
+             [1,1],[1,1],[1,2],[2,1],[1,2],[2,2],[1,3],[1,3],[2,3]&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Example&amp;nbsp;3:&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;Input: nums1 = [1,2], nums2 = [3], k = 3
+Output: [1,3],[2,3]
+Explanation: All possible pairs are returned from the sequence: [1,3],[2,3]&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;I&amp;#8217;m not sure if there&amp;#8217;s a more efficient solution to this problem. What I have done hear is produce a list of all possible &lt;code&gt;n1&lt;/code&gt;, &lt;code&gt;n2&lt;/code&gt; combinations and their sums, and heapified the list by the sum. Then I pop &lt;code&gt;k&lt;/code&gt; elements off the heap. This runs in O(n^2), but I couldn&amp;#8217;t think of a way to do it&amp;nbsp;quicker.&lt;/p&gt;
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;heapq&lt;/span&gt;
+
+&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Solution&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;kSmallestPairs&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;nums1&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;List&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="n"&gt;nums2&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;List&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="n"&gt;k&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;List&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;List&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;]]:&lt;/span&gt;
+
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="ow"&gt;not&lt;/span&gt; &lt;span class="n"&gt;nums1&lt;/span&gt; &lt;span class="ow"&gt;or&lt;/span&gt; &lt;span class="ow"&gt;not&lt;/span&gt; &lt;span class="n"&gt;nums2&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="p"&gt;[]&lt;/span&gt;
+
+        &lt;span class="n"&gt;heap&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[(&lt;/span&gt;&lt;span class="n"&gt;n1&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;n2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;n1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;n2&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;n1&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;nums1&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;n2&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;nums2&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+        &lt;span class="n"&gt;heapq&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;heapify&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;heap&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="n"&gt;l&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;len&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;heap&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;k&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="nb"&gt;len&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;heap&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;else&lt;/span&gt; &lt;span class="n"&gt;k&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;heapq&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;heappop&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;heap&lt;/span&gt;&lt;span class="p"&gt;)[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;:]&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;_&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="nb"&gt;range&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;l&lt;/span&gt;&lt;span class="p"&gt;)]&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">David Hadaller</dc:creator><pubDate>Tue, 09 Jun 2020 17:00:00 -0400</pubDate><guid isPermaLink="false">tag:None,2020-06-09:/blog/2020/06/09/373-find-k-pairs-with-smallest-sums-david/</guid><category>David</category><category>Week 2</category><category>LeetCode</category><category>Draft</category></item><item><title>692 Top K Frequent Words (David)</title><link>/blog/2020/06/09/692-top-k-frequent-words-david/</link><description>&lt;p&gt;Here we solve the &lt;a href="https://leetcode.com/problems/top-k-frequent-words/description/"&gt;Top K Frequent Words&lt;/a&gt; from&amp;nbsp;LeetCode.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Given a non-empty list of words, return the &lt;em&gt;k&lt;/em&gt; most frequent&amp;nbsp;elements.&lt;/p&gt;
+&lt;p&gt;Your answer should be sorted by frequency from highest to lowest. If  two words have the same frequency, then the word with the lower  alphabetical order comes&amp;nbsp;first.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Example&amp;nbsp;1:&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;Input: ["i", "love", "leetcode", "i", "love", "coding"], k = 2
+Output: ["i", "love"]
+Explanation: "i" and "love" are the two most frequent words.
+    Note that "i" comes before "love" due to a lower alphabetical order.&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Example&amp;nbsp;2:&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;Input: ["the", "day", "is", "sunny", "the", "the", "the", "sunny", "is", "is"], k = 4
+Output: ["the", "is", "sunny", "day"]
+Explanation: "the", "is", "sunny" and "day" are the four most frequent words,
+    with the number of occurrence being 4, 3, 2 and 1 respectively.&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;You may assume &lt;em&gt;k&lt;/em&gt; is always valid, 1 ≤ &lt;em&gt;k&lt;/em&gt; ≤ number of unique&amp;nbsp;elements.&lt;/li&gt;
+&lt;li&gt;Input words contain only lowercase&amp;nbsp;letters.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;Follow&amp;nbsp;up:&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Try to solve it in &lt;em&gt;O&lt;/em&gt;(&lt;em&gt;n&lt;/em&gt; log &lt;em&gt;k&lt;/em&gt;) time and &lt;em&gt;O&lt;/em&gt;(&lt;em&gt;n&lt;/em&gt;) extra&amp;nbsp;space.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;This is a simple problem if you know that &lt;a href="https://stackoverflow.com/questions/9755721/how-can-building-a-heap-be-on-time-complexity"&gt;heaps are built in O(n)&lt;/a&gt; and that the &lt;code&gt;Counter()&lt;/code&gt; class allows us to easily keep count of frequent elements in python. First we create the &lt;code&gt;word_freq&lt;/code&gt; counter dictionary for word frequency, after which we create a list of tuples; we heapify this list into a min heap (negating &lt;code&gt;freq&lt;/code&gt; with &lt;code&gt;-freq&lt;/code&gt; allows us to sort like a max heap). After this, we return only the first k elements of the heap. The overall runtime complexity is O(k + 3n) where n is the length of the &lt;code&gt;words&lt;/code&gt; list.&lt;/p&gt;
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;collections&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;Counter&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;heapq&lt;/span&gt;
+
+&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Solution&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;topKFrequent&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;words&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;List&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nb"&gt;str&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="n"&gt;k&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;List&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nb"&gt;str&lt;/span&gt;&lt;span class="p"&gt;]:&lt;/span&gt;
+
+        &lt;span class="n"&gt;word_freq&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;  &lt;span class="n"&gt;Counter&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;words&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="n"&gt;heap&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[(&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;freq&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;word&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;word&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;freq&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;word_freq&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;items&lt;/span&gt;&lt;span class="p"&gt;()]&lt;/span&gt;
+        &lt;span class="n"&gt;heapq&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;heapify&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;heap&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;heapq&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;heappop&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;heap&lt;/span&gt;&lt;span class="p"&gt;)[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;_&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="nb"&gt;range&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;k&lt;/span&gt;&lt;span class="p"&gt;)]&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">David Hadaller</dc:creator><pubDate>Tue, 09 Jun 2020 17:00:00 -0400</pubDate><guid isPermaLink="false">tag:None,2020-06-09:/blog/2020/06/09/692-top-k-frequent-words-david/</guid><category>David</category><category>Week 2</category><category>LeetCode</category></item><item><title>Week 2 Excercises</title><link>/blog/2020/05/26/week-2-excercises/</link><description>&lt;h3 id="goals"&gt;Goals&lt;a class="headerlink" href="#goals" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;This week we will be covering the fundamentals of &lt;em&gt;hash tables, heaps, stacks, and queues&lt;/em&gt; and common ways they appear in&amp;nbsp;interviews.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Test understanding of run times of each data&amp;nbsp;structure&lt;/li&gt;
+&lt;li&gt;Being able to identify the proper data structure to&amp;nbsp;use&lt;/li&gt;
+&lt;li&gt;Familiarity with hash tables, heaps, queues,&amp;nbsp;stacks&lt;/li&gt;
+&lt;li&gt;Learning how to better communicate in an interview&amp;nbsp;setting&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="tuesday"&gt;Tuesday&lt;a class="headerlink" href="#tuesday" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://leetcode.com/problems/jewels-and-stones/description/"&gt;Jewels and Stones -&amp;nbsp;LeetCode&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://leetcode.com/problems/valid-sudoku/description/"&gt;Valid Sudoku -&amp;nbsp;LeetCode&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="thursday"&gt;Thursday&lt;a class="headerlink" href="#thursday" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;Do the following readings&amp;nbsp;(important):&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://github.com/codepath/compsci_guides/wiki/Hash-Tables"&gt;Hash Tables · codepath/compsci_guides&amp;nbsp;Wiki&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/codepath/compsci_guides/wiki/Heaps"&gt;Heaps · codepath/compsci_guides&amp;nbsp;Wiki&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/codepath/compsci_guides/wiki/Stacks-and-Queues"&gt;Stacks and Queues · codepath/compsci_guides&amp;nbsp;Wiki&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;And solve the following&amp;nbsp;problems:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://leetcode.com/problems/implement-queue-using-stacks/description/"&gt;Implement Queue using Stacks -&amp;nbsp;LeetCode&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://leetcode.com/problems/find-median-from-data-stream/description/"&gt;Find Median from Data Stream -&amp;nbsp;LeetCode&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://leetcode.com/problems/isomorphic-strings/description/"&gt;Isomorphic Strings -&amp;nbsp;LeetCode&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://leetcode.com/problems/happy-number/description/"&gt;Happy Number -&amp;nbsp;LeetCode&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="saturday"&gt;Saturday&lt;a class="headerlink" href="#saturday" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://leetcode.com/problems/top-k-frequent-words/description/"&gt;Top K Frequent Words -&amp;nbsp;LeetCode&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://leetcode.com/problems/find-k-pairs-with-smallest-sums/description/"&gt;Find K Pairs with Smallest Sums -&amp;nbsp;LeetCode&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/playlist?list=PL7zKQzeqjecKERijhtFeWf7OYwt27mfKP"&gt;Top K Frequent Words Walkthrough -&amp;nbsp;YouTube&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">David Hadaller</dc:creator><pubDate>Tue, 26 May 2020 17:15:00 -0400</pubDate><guid isPermaLink="false">tag:None,2020-05-26:/blog/2020/05/26/week-2-excercises/</guid><category>Weekly Lessons</category><category>Week 2</category><category>Excercises</category><category>LeetCode</category></item></channel></rss>

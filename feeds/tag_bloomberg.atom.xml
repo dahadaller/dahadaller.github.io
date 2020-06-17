@@ -1,0 +1,429 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>CCNY_Prep - Bloomberg</title><link href="/" rel="alternate"></link><link href="/feeds/tag_bloomberg.atom.xml" rel="self"></link><id>/</id><updated>2020-05-18T00:00:00-04:00</updated><subtitle>This is where I do test things</subtitle><entry><title>200 Number of Islands (Kieran)</title><link href="/blog/2020/05/18/200-number-of-islands-kieran/" rel="alternate"></link><published>2020-05-18T00:00:00-04:00</published><updated>2020-05-18T00:00:00-04:00</updated><author><name>Kieran Duggan</name></author><id>tag:None,2020-05-18:/blog/2020/05/18/200-number-of-islands-kieran/</id><summary type="html">&lt;blockquote&gt;
+&lt;p&gt;Given a 2d grid map of &amp;#8216;1&amp;#8217;s (land) and &amp;#8216;0&amp;#8217;s (water), count the number of islands. An island is surrounded by water and is formed by connecting adjacent lands horizontally or vertically. You may assume all four edges of the grid are all surrounded by&amp;nbsp;water.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+ 2 …&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</summary><content type="html">&lt;blockquote&gt;
+&lt;p&gt;Given a 2d grid map of &amp;#8216;1&amp;#8217;s (land) and &amp;#8216;0&amp;#8217;s (water), count the number of islands. An island is surrounded by water and is formed by connecting adjacent lands horizontally or vertically. You may assume all four edges of the grid are all surrounded by&amp;nbsp;water.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Solution&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="n"&gt;grid&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;list&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;dfs&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;grid&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;0&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="k"&gt;return&lt;/span&gt;
+        &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;grid&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;0&amp;#39;&lt;/span&gt;
+
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;=&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;dfs&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="nb"&gt;len&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;grid&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+            &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;dfs&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;=&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;dfs&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="nb"&gt;len&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;grid&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;]):&lt;/span&gt;
+            &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;dfs&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;numIslands&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;local_grid&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;List&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;List&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nb"&gt;str&lt;/span&gt;&lt;span class="p"&gt;]])&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;grid&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;local_grid&lt;/span&gt;
+        &lt;span class="n"&gt;count&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;
+        &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="nb"&gt;range&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="nb"&gt;len&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;grid&lt;/span&gt;&lt;span class="p"&gt;)):&lt;/span&gt;
+            &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;j&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="nb"&gt;range&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="nb"&gt;len&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;grid&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;])):&lt;/span&gt;
+                &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;grid&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="n"&gt;j&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;1&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+                    &lt;span class="n"&gt;count&lt;/span&gt;&lt;span class="o"&gt;+=&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;
+                    &lt;span class="c1"&gt;#print(f&amp;#39;{self.grid[0]}\n{self.grid[1]}\n{self.grid[2]}\n{self.grid[3]}\n&amp;#39;)&lt;/span&gt;
+                    &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;dfs&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;j&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;count&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</content><category term="Kieran"></category><category term="LeetCode"></category><category term="Bloomberg"></category></entry><entry><title>543 Diameter of Binary Tree (Kieran)</title><link href="/blog/2020/05/18/543-diameter-of-binary-tree-kieran/" rel="alternate"></link><published>2020-05-18T00:00:00-04:00</published><updated>2020-05-18T00:00:00-04:00</updated><author><name>Kieran Duggan</name></author><id>tag:None,2020-05-18:/blog/2020/05/18/543-diameter-of-binary-tree-kieran/</id><summary type="html">&lt;blockquote&gt;
+&lt;p&gt;Given a binary tree, you need to compute the length of the diameter of the tree. The diameter of a binary tree is the length of the longest path between any two nodes in a tree. This path may or may not pass through the&amp;nbsp;root.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+ 2
+ 3
+ 4 …&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</summary><content type="html">&lt;blockquote&gt;
+&lt;p&gt;Given a binary tree, you need to compute the length of the diameter of the tree. The diameter of a binary tree is the length of the longest path between any two nodes in a tree. This path may or may not pass through the&amp;nbsp;root.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c1"&gt;# Definition for a binary tree node.&lt;/span&gt;
+&lt;span class="c1"&gt;# class TreeNode:&lt;/span&gt;
+&lt;span class="c1"&gt;#     def __init__(self, val=0, left=None, right=None):&lt;/span&gt;
+&lt;span class="c1"&gt;#         self.val = val&lt;/span&gt;
+&lt;span class="c1"&gt;#         self.left = left&lt;/span&gt;
+&lt;span class="c1"&gt;#         self.right = right&lt;/span&gt;
+&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Solution&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;height&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;root&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;TreeNode&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;root&lt;/span&gt; &lt;span class="ow"&gt;is&lt;/span&gt; &lt;span class="kc"&gt;None&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;
+        &lt;span class="k"&gt;else&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="nb"&gt;max&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;height&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;root&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;left&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;height&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;root&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;right&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;diameterOfBinaryTree&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;root&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;TreeNode&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;root&lt;/span&gt; &lt;span class="ow"&gt;is&lt;/span&gt; &lt;span class="kc"&gt;None&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;
+        &lt;span class="k"&gt;else&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="n"&gt;lheight&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;height&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;root&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;left&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+            &lt;span class="n"&gt;rheight&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;height&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;root&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;right&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+            &lt;span class="n"&gt;ldiam&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;diameterOfBinaryTree&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;root&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;left&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+            &lt;span class="n"&gt;rdiam&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;diameterOfBinaryTree&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;root&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;right&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+            &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="nb"&gt;max&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;lheight&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="n"&gt;rheight&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;ldiam&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;rdiam&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</content><category term="Kieran"></category><category term="LeetCode"></category><category term="Bloomberg"></category></entry><entry><title>Bloomberg Excercises</title><link href="/blog/2020/05/17/bloomberg-excercises/" rel="alternate"></link><published>2020-05-17T11:15:00-04:00</published><updated>2020-05-17T11:15:00-04:00</updated><author><name>David Hadaller</name></author><id>tag:None,2020-05-17:/blog/2020/05/17/bloomberg-excercises/</id><summary type="html">&lt;p&gt;User &lt;a href="https://leetcode.com/raptor16/"&gt;raptor16&lt;/a&gt; from leetcode compiled the following list of Bloomberg&amp;#8217;s phone interview questions (original can be found &lt;a href="https://leetcode.com/raptor16/"&gt;here&lt;/a&gt;): &lt;/p&gt;
+&lt;h3 id="monday"&gt;Monday&lt;a class="headerlink" href="#monday" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href="https://leetcode.com/problems/diameter-of-binary-tree/"&gt;Diameter of Binary&amp;nbsp;Tree&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://leetcode.com/problems/number-of-islands/"&gt;Number of&amp;nbsp;Islands&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://leetcode.com/problems/two-sum"&gt;Two&amp;nbsp;Sum&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://leetcode.com/problems/subsets"&gt;Given a string print all subsets (not&amp;nbsp;permutations)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://leetcode.com/problems/two-city-scheduling/description/"&gt;Two City&amp;nbsp;Scheduling&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Electronic&amp;nbsp;Exchange.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;You work in an electronic exchange. Throughout the …&lt;/p&gt;&lt;/blockquote&gt;&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;p&gt;User &lt;a href="https://leetcode.com/raptor16/"&gt;raptor16&lt;/a&gt; from leetcode compiled the following list of Bloomberg&amp;#8217;s phone interview questions (original can be found &lt;a href="https://leetcode.com/raptor16/"&gt;here&lt;/a&gt;): &lt;/p&gt;
+&lt;h3 id="monday"&gt;Monday&lt;a class="headerlink" href="#monday" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href="https://leetcode.com/problems/diameter-of-binary-tree/"&gt;Diameter of Binary&amp;nbsp;Tree&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://leetcode.com/problems/number-of-islands/"&gt;Number of&amp;nbsp;Islands&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://leetcode.com/problems/two-sum"&gt;Two&amp;nbsp;Sum&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://leetcode.com/problems/subsets"&gt;Given a string print all subsets (not&amp;nbsp;permutations)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://leetcode.com/problems/two-city-scheduling/description/"&gt;Two City&amp;nbsp;Scheduling&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Electronic&amp;nbsp;Exchange.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;You work in an electronic exchange. Throughout the day, you receive ticks (trading data) which consists of  product name and its traded volume of stocks. Eg: {name: vodafone, volume: 20}. What data structure will you 
+maintain&amp;nbsp;if:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;You have to tell top k products traded by volume at end of&amp;nbsp;day.&lt;/li&gt;
+&lt;li&gt;You have to tell top k products traded by volume throughout the&amp;nbsp;day.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Insert Delete GetRandom&amp;nbsp;o(1)&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Design a data structure with requirements:
+You have a &lt;Key, Value&gt; structured input data for all objects
+Where you have
+Insert : O(1)
+Lookup : O(1)
+Delete : O(1)
+You can traverse the added elements in the order they were&amp;nbsp;inserted.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Similar to&amp;nbsp;https://leetcode.com/problems/insert-delete-getrandom-o1/&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://leetcode.com/discuss/interview-question/380650/Bloomberg-or-Phone-Screen-or-Candy-Crush-1D"&gt;1D candy&amp;nbsp;crush&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://leetcode.com/discuss/interview-question/124551/"&gt;Remove&amp;nbsp;parentheses&lt;/a&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Given a string of parentheses:
+s = &amp;#8220;()(()()()()())&amp;#8221;
+Remove the minimum amount of parentheses to make the string parentheses balanced&amp;nbsp;in-place&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://leetcode.com/problems/lru-cache/"&gt;&lt;span class="caps"&gt;LRU&lt;/span&gt;&amp;nbsp;Cache&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id="wednesday"&gt;Wednesday&lt;a class="headerlink" href="#wednesday" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://leetcode.com/problems/decode-string/"&gt;Decode&amp;nbsp;String&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://leetcode.com/problems/valid-anagram/"&gt;Valid&amp;nbsp;Anagram&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://leetcode.com/problems/palindrome-number/"&gt;Palindrome Number&lt;/a&gt; Optimize from O(N) to O(log N) time&amp;nbsp;complexity.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://leetcode.com/problems/flatten-a-multilevel-doubly-linked-list/"&gt;Flatten a multilevel doubly linked&amp;nbsp;list&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://leetcode.com/discuss/interview-question/314733/Bloomberg-or-Output-data-from-a-stream-in-order"&gt;Output data from a stream in&amp;nbsp;order&lt;/a&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Input: (1, &amp;#8220;abcd&amp;#8221;), (2, &amp;#8220;efgh&amp;#8221;), (4, &amp;#8220;mnop&amp;#8221;), (5, &amp;#8220;qrst&amp;#8221;), (3,&amp;nbsp;&amp;#8220;ijkl&amp;#8221;)&lt;/p&gt;
+&lt;p&gt;Write a program to output the data from the stream in realtime in order, so 1,2,3,4,5..
+You cannot queue up the incoming data from the stream.
+So for example if the first incoming bit of data is (1, &amp;#8220;abcd&amp;#8221;), and the second is (4, &amp;#8220;mnop&amp;#8221;), you cannot output (4, &amp;#8220;mnop&amp;#8221;) until you get 2,&amp;nbsp;3.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://leetcode.com/discuss/interview-question/406663/Bloomberg-or-Phone-Screen-or-Min-Steps-to-Generate-Number"&gt;Find the minimum steps to generate a number given only two operations (&lt;span class="caps"&gt;BFS&lt;/span&gt;)&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;https://leetcode.com/discuss/interview-question/329221/Bloomberg-or-Phone-screen-or-Software-Development-Internship-2019&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://leetcode.com/discuss/interview-question/413734/Bloomberg-or-Re-order-Array-Based-on-Dictionary"&gt;Reorder array based on dictionary&lt;/a&gt;
+      Similar to &lt;a href="https://leetcode.com/problems/reconstruct-itinerary/"&gt;Reconstruct&amp;nbsp;Itinerary&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id="saturday"&gt;Saturday&lt;a class="headerlink" href="#saturday" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://leetcode.com/problems/word-break-ii/"&gt;Word Break &lt;span class="caps"&gt;II&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://leetcode.com/problems/subsets/"&gt;Subsets&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://leetcode.com/problems/longest-substring-without-repeating-characters/"&gt;Longest Substring without repeating&amp;nbsp;characters&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://leetcode.com/discuss/interview-question/341369/Bloomberg-or-Phone-screen-or-First-unique-element-and-Flatten-linked-list"&gt;Flatten Linked List or First Unique&amp;nbsp;Element&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://leetcode.com/discuss/interview-question/346748/Bloomberg-or-Phone-Screen-or-File-Diffs-With-Ram-Constraints"&gt; File Diffs with &lt;span class="caps"&gt;RAM&lt;/span&gt;&amp;nbsp;Constraints &lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://leetcode.com/discuss/interview-question/407179/Bloomberg-or-Remove-array-elements-in-given-index-ranges"&gt;Remove array elements in given index&amp;nbsp;ranges&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Right side view and Word Search: This is the question I (the author) got on my phone interview today. Nov 10 2019. I got 2 Leetcode medium questions with 5 minutes for questions and 5 minute for introductions, leaving 35 minutes for the coding  portion. We discussed my past experience and he probled in deeper to see if I did have a good understanding of the tech stack that was used by  my previous&amp;nbsp;internship.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;span class="caps"&gt;LC&lt;/span&gt; Medium: &lt;a href="https://leetcode.com/problems/binary-tree-right-side-view/"&gt;Right side view of a binary tree&lt;/a&gt;
+  They expected this code to compile and be tested out to be completely bug free, so you need to write the test cases&amp;nbsp;yourself.&lt;/li&gt;
+&lt;li&gt;&lt;span class="caps"&gt;LC&lt;/span&gt; Medium: &lt;a href="https://leetcode.com/problems/word-search/"&gt;Word Search I&lt;/a&gt;
+  The interviewer did not expect this code to compile, so long as the  general idea is correct you are good. You are expected to manually run  through your code using their&amp;nbsp;example.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;p&gt;More under the interview experience section of&amp;nbsp;leetcode&lt;/p&gt;
+&lt;p&gt;Why Bloomberg
+ &lt;span class="caps"&gt;OOP&lt;/span&gt; Questions
+ Discuss the difference between Python, Java, and Javascript
+ &lt;span class="caps"&gt;LC&lt;/span&gt;: Intersection of two linked list x2
+ Check if two linked lists intersect and return the intersecting point
+ &lt;span class="caps"&gt;LC&lt;/span&gt;: Candy Crush
+ &lt;span class="caps"&gt;LC&lt;/span&gt;: Merge Intervals
+ &lt;span class="caps"&gt;LC&lt;/span&gt;: Add two numbers
+ &lt;span class="caps"&gt;LC&lt;/span&gt;: Interleaving strings
+ Implement a vector in C++ (use dynamic array approach)
+ &lt;span class="caps"&gt;LC&lt;/span&gt;: Insert delete getrandom o(1)
+ Occurence sort: given a string sort the string based on the number of  times a letter appears in the string from most occurring to least  occurring. For letters having the same occurrence sort based on  lexicographical order
+ &lt;span class="caps"&gt;LC&lt;/span&gt;: Trapping rain water
+ &lt;span class="caps"&gt;LC&lt;/span&gt; Two sum
+ Iterative and Recursive &lt;span class="caps"&gt;BS&lt;/span&gt;
+ &lt;span class="caps"&gt;LC&lt;/span&gt; 3Sum
+ Onsite (ignore for now)
+ Definition of a Binary Search Tree followed by a coding question on finding the kth largest element in a binary search&amp;nbsp;tree&lt;/p&gt;</content><category term="Weekly Lessons"></category><category term="Bloomberg"></category><category term="Excercises"></category><category term="LeetCode"></category></entry><entry><title>242 Valid Anagram (David)</title><link href="/blog/2020/05/10/242-valid-anagram-david/" rel="alternate"></link><published>2020-05-10T11:30:00-04:00</published><updated>2020-05-10T11:30:00-04:00</updated><author><name>David Hadaller</name></author><id>tag:None,2020-05-10:/blog/2020/05/10/242-valid-anagram-david/</id><summary type="html">&lt;p&gt;The posts in this series (each with the tag &lt;code&gt;Bloomberg&lt;/code&gt;) contain problems taken from &lt;a href="https://leetcode.com/discuss/interview-question/439548/Bloomberg-Phone-Interview-Questions"&gt;this list&lt;/a&gt; of Bloomberg phone interview problems. In this post, we solve LeetCode&amp;#8217;s &lt;a href="https://leetcode.com/problems/valid-anagram/"&gt;242 Valid Anagram&lt;/a&gt;. &lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Given two strings s and t , write a function to determine if t is an anagram of&amp;nbsp;s.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;First …&lt;/p&gt;</summary><content type="html">&lt;p&gt;The posts in this series (each with the tag &lt;code&gt;Bloomberg&lt;/code&gt;) contain problems taken from &lt;a href="https://leetcode.com/discuss/interview-question/439548/Bloomberg-Phone-Interview-Questions"&gt;this list&lt;/a&gt; of Bloomberg phone interview problems. In this post, we solve LeetCode&amp;#8217;s &lt;a href="https://leetcode.com/problems/valid-anagram/"&gt;242 Valid Anagram&lt;/a&gt;. &lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Given two strings s and t , write a function to determine if t is an anagram of&amp;nbsp;s.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;First, it&amp;#8217;s important to know the difference between an anagram and a palindrome. An anagram is a word formed by rearranging the letters of another word. So if string &lt;code&gt;s&lt;/code&gt; is &amp;#8220;tarp&amp;#8221; and string &lt;code&gt;t&lt;/code&gt; is &amp;#8220;part&amp;#8221;, then &lt;code&gt;s&lt;/code&gt; and &lt;code&gt;t&lt;/code&gt; are anagrams of one another. On the other hand, A palindrome is a word that reads the same backward or forward (like the word&amp;nbsp;&amp;#8220;kayak&amp;#8221;).&lt;/p&gt;
+&lt;p&gt;There are a couple of ways to tackle this problem. Each approach involves creating a dictionary where the letters from &lt;code&gt;s&lt;/code&gt; and &lt;code&gt;t&lt;/code&gt; are keys and the values are counts of how many times the letters occur in the string. Whenever we create a tally dictionary in Python, we have to be cognizant of avoiding &lt;code&gt;KeyError&lt;/code&gt;s. The first approach relies on python&amp;#8217;s &lt;code&gt;.get()&lt;/code&gt; method to avoid this, while the last two methods rely on the Python&amp;#8217;s &lt;code&gt;collections&lt;/code&gt; classes. &lt;/p&gt;
+&lt;h3 id="solution-using-dictionary-and-get"&gt;Solution using Dictionary and &lt;code&gt;.get()&lt;/code&gt;&lt;a class="headerlink" href="#solution-using-dictionary-and-get" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;In Python, the &lt;code&gt;get(key, default)&lt;/code&gt; method returns a value for the given key in a dictionary. If &lt;code&gt;key&lt;/code&gt; is not available, the method then returns &lt;code&gt;default&lt;/code&gt;. &lt;/p&gt;
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Solution&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;isAnagram&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nb"&gt;str&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;t&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nb"&gt;str&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="nb"&gt;bool&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="c1"&gt;# if strings are not same length, &lt;/span&gt;
+        &lt;span class="c1"&gt;# they can&amp;#39;t be anagrams&lt;/span&gt;
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="nb"&gt;len&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;!=&lt;/span&gt; &lt;span class="nb"&gt;len&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;t&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+            &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="kc"&gt;False&lt;/span&gt;
+
+        &lt;span class="c1"&gt;# create default dictionaries for for s and t&lt;/span&gt;
+        &lt;span class="n"&gt;s_dict&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{}&lt;/span&gt;
+        &lt;span class="n"&gt;t_dict&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{}&lt;/span&gt;
+
+        &lt;span class="c1"&gt;# populate dictionaries for for s and t&lt;/span&gt;
+        &lt;span class="c1"&gt;# where the letters are keys and the number of times&lt;/span&gt;
+        &lt;span class="c1"&gt;# the letter appears are values&lt;/span&gt;
+        &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;s_char&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; 
+
+            &lt;span class="c1"&gt;# if s_dict[s_char] doesn&amp;#39;t exist yet, &lt;/span&gt;
+            &lt;span class="c1"&gt;# initialize to 1. Otherwise increment by 1&lt;/span&gt;
+            &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="ow"&gt;not&lt;/span&gt; &lt;span class="n"&gt;s_dict&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;s_char&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+                &lt;span class="n"&gt;s_dict&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;s_char&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;
+            &lt;span class="k"&gt;else&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+                &lt;span class="n"&gt;s_dict&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;s_char&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;
+
+        &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;t_char&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;t&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="ow"&gt;not&lt;/span&gt; &lt;span class="n"&gt;t_dict&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;t_char&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+                &lt;span class="n"&gt;t_dict&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;t_char&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;
+            &lt;span class="k"&gt;else&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+                &lt;span class="n"&gt;t_dict&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;t_char&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;
+
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;t_dict&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="n"&gt;s_dict&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;h3 id="solution-using-collectionsdefaultdict"&gt;Solution using &lt;code&gt;collections.defaultdict&lt;/code&gt;&lt;a class="headerlink" href="#solution-using-collectionsdefaultdict" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;The &lt;code&gt;defaultdict&lt;/code&gt; class is covered in the &lt;a href="{filename}useful_python_libraries.md"&gt;Stacks, Queues, Heaps, and Hash Tables in Python&lt;/a&gt; post. Where a Python dictionary normally throws a &lt;code&gt;KeyError&lt;/code&gt; if you try to retrieve a value with a key that is not in the dictionary, &lt;code&gt;defaultdict&lt;/code&gt; will just create a new key-value pair with a default&amp;nbsp;value.&lt;/p&gt;
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;collections&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;defaultdict&lt;/span&gt; 
+
+&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Solution&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;isAnagram&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nb"&gt;str&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;t&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nb"&gt;str&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="nb"&gt;bool&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+
+        &lt;span class="c1"&gt;# if strings are not same length, &lt;/span&gt;
+        &lt;span class="c1"&gt;# they can&amp;#39;t be anagrams&lt;/span&gt;
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="nb"&gt;len&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;!=&lt;/span&gt; &lt;span class="nb"&gt;len&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;t&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+            &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="kc"&gt;False&lt;/span&gt;
+
+        &lt;span class="c1"&gt;# this default dict makes values default to 0 (int&amp;#39;s default) &lt;/span&gt;
+        &lt;span class="c1"&gt;# when any accessed key doesn&amp;#39;t already exist in the dictionary&lt;/span&gt;
+        &lt;span class="n"&gt;s_dict&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;defaultdict&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="n"&gt;t_dict&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;defaultdict&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+
+        &lt;span class="c1"&gt;# populate default dictionaries for for s and t&lt;/span&gt;
+        &lt;span class="c1"&gt;# where the letters are keys and the number of times&lt;/span&gt;
+        &lt;span class="c1"&gt;# the letter appears are values&lt;/span&gt;
+        &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;s_char&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; 
+            &lt;span class="n"&gt;s_dict&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;s_char&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;s_dict&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;s_char&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;
+
+        &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;t_char&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;t&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="n"&gt;t_dict&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;t_char&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;t_dict&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;t_char&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt; 
+
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;t_dict&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="n"&gt;s_dict&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;h3 id="solutions-using-collectionscounter"&gt;Solutions using &lt;code&gt;collections.Counter&lt;/code&gt;&lt;a class="headerlink" href="#solutions-using-collectionscounter" title="Permanent link"&gt;&amp;para;&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;Like &lt;code&gt;defaultdict&lt;/code&gt;, the &lt;code&gt;Counter&lt;/code&gt; class is also a subclass of Python Dictionary. It&amp;#8217;s a class designed to keep tallies, like we are doing&amp;nbsp;here. &lt;/p&gt;
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;collections&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;Counter&lt;/span&gt; 
+
+&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Solution&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;isAnagram&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nb"&gt;str&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;t&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nb"&gt;str&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="nb"&gt;bool&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+
+            &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="nb"&gt;len&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;!=&lt;/span&gt; &lt;span class="nb"&gt;len&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;t&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+                &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="kc"&gt;False&lt;/span&gt;
+
+            &lt;span class="c1"&gt;# in one step, we instantiate two dictionaries &lt;/span&gt;
+            &lt;span class="c1"&gt;# that each contain tallies of letters in s and t&lt;/span&gt;
+            &lt;span class="c1"&gt;# and we compare if those tally dictionaries are equal&lt;/span&gt;
+            &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;Counter&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="n"&gt;Counter&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;t&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</content><category term="David"></category><category term="Bloomberg"></category><category term="LeetCode"></category></entry></feed>

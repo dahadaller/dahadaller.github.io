@@ -19,11 +19,11 @@ Read the following articles and watch the youtube playlist that walks through gr
 * [Topological Sort · codepath/compsci_guides Wiki](https://github.com/codepath/compsci_guides/wiki/Topological-Sort)
 * [Detect Cycle in Directed Graph - YouTube](https://www.youtube.com/playlist?list=PL7zKQzeqjecKpXlM9hd_jA-9PZ6EZGzd0)
 
-## Wednesday
+## Thursday
 * [Sum of dependencies in a graph - GeeksforGeeks](https://www.geeksforgeeks.org/sum-dependencies-graph/)
 * [Number of sink nodes in a graph - GeeksforGeeks](https://www.geeksforgeeks.org/number-sink-nodes-graph/)
 
-## Thursday
+## Saturday 
 * [Is Graph Bipartite? - LeetCode](https://leetcode.com/problems/is-graph-bipartite/description/)
 * [Minimum Height Trees - LeetCode](https://leetcode.com/problems/minimum-height-trees/description/)
 * [Clone Graph - LeetCode](https://leetcode.com/problems/clone-graph/description/)
